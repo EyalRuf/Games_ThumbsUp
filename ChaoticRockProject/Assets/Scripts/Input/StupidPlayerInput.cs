@@ -113,12 +113,12 @@ public class StupidController
         {
             //read raw analog sticks
             JoystickRaw_Left = new Vector2(
-                (Keyboard.current[DebugKeys[0]].isPressed ? 1 : 0) + (Keyboard.current[DebugKeys[1]].isPressed ? -1 : 0),
+                (Keyboard.current[DebugKeys[0]].isPressed ? 0 : 1) + (Keyboard.current[DebugKeys[1]].isPressed ? 0 : -1),
                 (Keyboard.current[DebugKeys[2]].isPressed ? 1 : 0) + (Keyboard.current[DebugKeys[3]].isPressed ? -1 : 0)
             );
 
             JoystickRaw_Right = new Vector2(
-                (Keyboard.current[DebugKeys[4]].isPressed ? 1 : 0) + (Keyboard.current[DebugKeys[5]].isPressed ? -1 : 0),
+                (Keyboard.current[DebugKeys[4]].isPressed ? 0 : 1) + (Keyboard.current[DebugKeys[5]].isPressed ? 0 : -1),
                 (Keyboard.current[DebugKeys[6]].isPressed ? 1 : 0) + (Keyboard.current[DebugKeys[7]].isPressed ? -1 : 0)
             );
 
