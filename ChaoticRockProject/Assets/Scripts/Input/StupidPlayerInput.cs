@@ -30,7 +30,7 @@ public class StupidPlayerInput : MonoBehaviour
 public class StupidController
 {
     [Header("General")]
-    public bool Debug;
+    public bool DebugMode;
     public bool isConnected;
     public int gamepadId;
 
@@ -109,7 +109,7 @@ public class StupidController
     public void Update(int gamepadsConnected)
     {
         //switches controls to the keyboard
-        if (Debug)
+        if (DebugMode)
         {
             //read raw analog sticks
             JoystickRaw_Left = new Vector2(
@@ -166,7 +166,7 @@ public class StupidController
         else
         {
             //if controller isn't connected
-            if (gamepadId <= gamepadsConnected)
+            if (gamepadId >= gamepadsConnected)
             {
                 isConnected = false;
                 return;
