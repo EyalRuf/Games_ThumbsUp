@@ -393,6 +393,7 @@ MonoBehaviour:
   stunned: 0
   dashing: 0
   grounded: 0
+  rockPicked: 0
   floorMask:
     serializedVersion: 2
     m_Bits: 55
@@ -407,6 +408,7 @@ MonoBehaviour:
   additionalDashSpeed: 18
   dashDuration: 0.25
   dashCooldown: 1.5
+  throwSpeed: 500
 --- !u!136 &4411709874753828522
 CapsuleCollider:
   m_ObjectHideFlags: 0
