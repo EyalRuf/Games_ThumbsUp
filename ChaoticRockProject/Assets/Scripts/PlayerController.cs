@@ -9,6 +9,15 @@ public class PlayerController : MonoBehaviour
     public bool stunned;
     public bool dashing;
     public bool grounded;
+    public bool holding;
+
+    [Header("Picking up and throwing")]
+    public float pickupRange;
+    public float holdingDistance;
+    public float holdingSpeed;
+
+    public float throwSpeed;
+    private Rigidbody rockBody;
 
     [Header("Stunning")]
     public LayerMask floorMask;
@@ -73,6 +82,45 @@ public class PlayerController : MonoBehaviour
         {
             dashCooldownCounter = dashCooldown;
             dashCounter = dashDuration;
+        }
+
+        //Rock pickup
+        if (holding == true)
+        {
+            //Move with the player
+            rockBody.MovePosition(Vector3.Lerp(rockBody.position, transform.position + transform.forward * holdingDistance, holdingSpeed * Time.deltaTime));
+            rockBody.useGravity = false;
+
+            //Throw the rock
+            if (spi.controller.YDown)
+            {
+                rockBody.useGravity = true;
+                holding = false;
+                rockBody.AddForce(transform.forward * throwSpeed, ForceMode.Acceleration); //changed to acceleration to add force independent of mass
+            }
+        }
+
+        if (spi.controller.BDown)
+        {   
+            if(holding == true)
+            {
+                //drop the rock
+                rockBody.useGravity = true;
+                holding = false;
+            }
+            else
+            {
+                Collider[] nearbyObjects = Physics.OverlapSphere(transform.position, pickupRange);
+
+                for (int i = 0; i < nearbyObjects.Length; i++)
+                {
+                    if (nearbyObjects[i].tag == "Rock" && spi.controller.BDown)
+                    {
+                        rockBody = nearbyObjects[i].GetComponent<Rigidbody>();
+                        holding = true;
+                    }
+                }
+            }
         }
     }
 
@@ -145,6 +193,10 @@ public class PlayerController : MonoBehaviour
 
     public void Stun(Vector3 knockback)
     {
+        //if holding rock drop it
+        rockBody.useGravity = true;
+        holding = false;
+
         stunCounter = stunDuration;
         stunned = true;
 

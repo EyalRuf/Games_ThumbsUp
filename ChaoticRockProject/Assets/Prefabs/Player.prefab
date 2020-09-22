@@ -393,6 +393,11 @@ MonoBehaviour:
   stunned: 0
   dashing: 0
   grounded: 0
+  holding: 0
+  pickupRange: 4
+  holdingDistance: 3
+  holdingSpeed: 10
+  throwSpeed: 750
   floorMask:
     serializedVersion: 2
     m_Bits: 55
@@ -403,7 +408,7 @@ MonoBehaviour:
   stayUprightSpeed: 5000
   jumpingForce: 400
   jumpCheckPoint: {fileID: 1844286817913386660}
-  dashingKnockBack: 500
+  dashingKnockBack: 1000
   additionalDashSpeed: 18
   dashDuration: 0.25
   dashCooldown: 1.5
