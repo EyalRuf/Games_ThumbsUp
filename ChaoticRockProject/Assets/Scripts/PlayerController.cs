@@ -9,7 +9,15 @@ public class PlayerController : MonoBehaviour
     public bool stunned;
     public bool dashing;
     public bool grounded;
-    public bool rockPicked;
+    public bool holding;
+
+    [Header("Picking up and throwing")]
+    public float pickupRange;
+    public float holdingDistance;
+    public float holdingSpeed;
+
+    public float throwSpeed;
+    private Rigidbody rockBody;
 
     [Header("Stunning")]
     public LayerMask floorMask;
@@ -33,10 +41,6 @@ public class PlayerController : MonoBehaviour
     public float dashCooldown;
     private float dashCounter;
     private float dashCooldownCounter;
-
-    [Header("Throwing")]
-    public float throwSpeed;
-    private Rigidbody rockBody;
 
     private Vector3 direction;
     private Vector3 rotationDirection;
@@ -81,30 +85,41 @@ public class PlayerController : MonoBehaviour
         }
 
         //Rock pickup
-        Collider[] nearbyObjects = Physics.OverlapSphere(transform.position, 2f);
-
-        for (int i = 0; i < nearbyObjects.Length; i++)
+        if (holding == true)
         {
-            if (nearbyObjects[i].tag == "Rock" && spi.controller.B)
+            //Move with the player
+            rockBody.MovePosition(Vector3.Lerp(rockBody.position, transform.position + transform.forward * holdingDistance, holdingSpeed * Time.deltaTime));
+            rockBody.useGravity = false;
+
+            //Throw the rock
+            if (spi.controller.YDown)
             {
-                rockBody = nearbyObjects[i].GetComponent<Rigidbody>();
-                rockPicked = true;
+                rockBody.useGravity = true;
+                holding = false;
+                rockBody.AddForce(transform.forward * throwSpeed, ForceMode.Acceleration); //changed to acceleration to add force independent of mass
             }
         }
 
-        if (rockPicked == true)
-        {
-            //Move with the player
-            rockBody.position = transform.position + transform.forward * 3;
-            rockBody.useGravity = false;
-            Invoke("DropRock", .5f);
-
-            //Throw the rock
-            if (spi.controller.Y)
+        if (spi.controller.BDown)
+        {   
+            if(holding == true)
             {
+                //drop the rock
                 rockBody.useGravity = true;
-                rockPicked = false;
-                rockBody.AddForce(transform.forward * throwSpeed, ForceMode.Force);
+                holding = false;
+            }
+            else
+            {
+                Collider[] nearbyObjects = Physics.OverlapSphere(transform.position, pickupRange);
+
+                for (int i = 0; i < nearbyObjects.Length; i++)
+                {
+                    if (nearbyObjects[i].tag == "Rock" && spi.controller.BDown)
+                    {
+                        rockBody = nearbyObjects[i].GetComponent<Rigidbody>();
+                        holding = true;
+                    }
+                }
             }
         }
     }
@@ -178,19 +193,13 @@ public class PlayerController : MonoBehaviour
 
     public void Stun(Vector3 knockback)
     {
+        //if holding rock drop it
+        rockBody.useGravity = true;
+        holding = false;
+
         stunCounter = stunDuration;
         stunned = true;
 
         rb.AddForce(knockback, ForceMode.Acceleration);
-    }
-
-    private void DropRock()
-    {
-
-        if (spi.controller.B)
-        {
-            rockBody.useGravity = true;
-            rockPicked = false;
-        }
     }
 }

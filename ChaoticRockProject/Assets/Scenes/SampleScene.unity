@@ -1880,11 +1880,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player (0)
       objectReference: {fileID: 0}
-    - target: {fileID: 4411709874753828519, guid: 48d8dc82db0e5974fb67c2b6c2132f95,
-        type: 3}
-      propertyPath: dashingKnockBack
-      value: 1000
-      objectReference: {fileID: 0}
     - target: {fileID: 4411709874753828521, guid: 48d8dc82db0e5974fb67c2b6c2132f95,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1940,10 +1935,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4411709875135546843, guid: 48d8dc82db0e5974fb67c2b6c2132f95,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 6ac0f6a668ad8f542bc8bfb0b55a4e4c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48d8dc82db0e5974fb67c2b6c2132f95, type: 3}
