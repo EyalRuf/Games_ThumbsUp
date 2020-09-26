@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
 
                 for (int i = 0; i < nearbyObjects.Length; i++)
                 {
-                    if (nearbyObjects[i].tag == "Rock" && spi.controller.BDown)
+                    if (nearbyObjects[i].tag == "Rock")
                     {
                         rockBody = nearbyObjects[i].GetComponent<Rigidbody>();
                         holding = true;
@@ -194,8 +194,11 @@ public class PlayerController : MonoBehaviour
     public void Stun(Vector3 knockback)
     {
         //if holding rock drop it
-        rockBody.useGravity = true;
-        holding = false;
+        if(rockBody != null)
+        {
+            rockBody.useGravity = true;
+            holding = false;
+        }
 
         stunCounter = stunDuration;
         stunned = true;
