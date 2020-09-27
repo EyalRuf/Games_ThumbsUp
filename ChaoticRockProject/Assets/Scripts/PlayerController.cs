@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Rock pickup
-        if (holding == true)
+        if (holding == true && rockBody != null)
         {
             //Move with the player
             rockBody.MovePosition(Vector3.Lerp(rockBody.position, transform.position + transform.forward * holdingDistance, holdingSpeed * Time.deltaTime));
