@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Rock pickup
-        if (holding)
+        if (holding == true && rockBody != null)
         {
             //Move with the player
             rockBody.MovePosition(Vector3.Lerp(rockBody.position, transform.position + transform.forward * holdingDistance, holdingSpeed * Time.deltaTime));
@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
         if (spi.controller.BDown)
         {   
-            if(holding)
+            if(holding == true && rockBody != null)
             {
                 //drop the rock
                 rockBody.useGravity = true;
@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
 
                 for (int i = 0; i < nearbyObjects.Length; i++)
                 {
-                    if (nearbyObjects[i].tag == "Rock" && spi.controller.BDown)
+                    if (nearbyObjects[i].tag == "Rock")
                     {
                         rockBody = nearbyObjects[i].GetComponent<Rigidbody>();
                         holding = true;
@@ -192,8 +192,11 @@ public class PlayerController : MonoBehaviour
     public void Stun(Vector3 knockback)
     {
         //if holding rock drop it
-        rockBody.useGravity = true;
-        holding = false;
+        if(rockBody != null)
+        {
+            rockBody.useGravity = true;
+            holding = false;
+        }
 
         stunCounter = stunDuration;
         stunned = true;
