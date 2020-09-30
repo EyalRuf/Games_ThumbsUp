@@ -22,9 +22,29 @@ public class GameManager : MonoBehaviour
     public float points;
     public float maxPoints;
 
+    //Timer
+    public Text timer;
+    public float startTime;
+    private float currentTime;
+
     void Start()
     {
+        currentTime = startTime;
         //spawn rocks randomly maybe.
+    }
+
+    private void Update()
+    {
+        //Timer counter
+        if (currentTime > 0)
+        {
+            currentTime -= 1 * Time.deltaTime;
+            float minute = currentTime / 60;
+            float second = (minute % 1) * 60;
+            timer.text = Mathf.Floor(minute) + " : " + Mathf.Floor(second);
+        }
+        else
+            MostPointsCheck();
     }
 
     public void AddScore(string deliver)
@@ -52,19 +72,50 @@ public class GameManager : MonoBehaviour
 
     void CheckWin()
     {
-        if (redScore >= maxPoints)
+        if (redScore >= 5) {
             winText.text = "Red has won!";
+            GameEnded();
+        }
+            
         else if (blueScore >= maxPoints)
+        {
             winText.text = "Blue has won!";
+            GameEnded();
+        }
+            
         else if (yellowScore >= maxPoints)
+        {
             winText.text = "Yellow has won!";
+            GameEnded();
+        }
+            
         else if (greenScore >= maxPoints)
+        {
             winText.text = "Green has won!";
+            GameEnded();
+        }
+            
     }
 
-    public void RespawnRock(GameObject rock)
+    void MostPointsCheck()
     {
-        Vector3 position = new Vector3(Random.Range(-13.0f, 13.0f), 2, Random.Range(-13.0f, 13.0f));
-        Instantiate(rock, position, Quaternion.identity);
+        float highScore = Mathf.Max(redScore, blueScore, yellowScore, greenScore);
+        timer.text = 0 + " : " + 0;
+
+        if (highScore == redScore)
+            winText.text = "Red has won!";
+        else if (highScore == blueScore)
+            winText.text = "Blue has won!";
+        else if (highScore == yellowScore)
+            winText.text = "Yellow has won!";
+        else if (highScore == greenScore)
+            winText.text = "Green has won!";
+
+        GameEnded();
+    }
+
+    void GameEnded()
+    {
+        Time.timeScale = 0;
     }
 }
