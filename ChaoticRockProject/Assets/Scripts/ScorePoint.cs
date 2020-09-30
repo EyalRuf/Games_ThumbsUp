@@ -17,18 +17,7 @@ public class ScorePoint : MonoBehaviour
     private void OnTriggerEnter(Collider col)
     {
         gm.AddScore(col.name);
-        gm.RespawnRock(gameObject);
         DestroySelf();
-    }
-
-    private void OnCollisionEnter(Collision col)
-    {
-
-        if (col.gameObject.name == "Water")
-        {
-            Invoke("DestroySelf", destroyRockDelay);
-            gm.RespawnRock(gameObject);
-        }
     }
 
     void DestroySelf()

@@ -8,7 +8,7 @@ public class DeathBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.CompareTag("Rock"))
         {
             other.tag = "Dead";
             Destroy(other.gameObject, deathDelay);

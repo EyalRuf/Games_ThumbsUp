@@ -114,12 +114,6 @@ public class GameManager : MonoBehaviour
         GameEnded();
     }
 
-    public void RespawnRock(GameObject rock)
-    {
-        Vector3 position = new Vector3(Random.Range(-13.0f, 13.0f), 2, Random.Range(-13.0f, 13.0f));
-        Instantiate(rock, position, Quaternion.identity);
-    }
-
     void GameEnded()
     {
         Time.timeScale = 0;
