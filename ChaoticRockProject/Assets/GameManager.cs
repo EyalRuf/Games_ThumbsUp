@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
 
     void CheckWin()
     {
-        if (redScore >= 5) {
+        if (redScore >= maxPoints) {
             winText.text = "Red has won!";
             GameEnded();
         }

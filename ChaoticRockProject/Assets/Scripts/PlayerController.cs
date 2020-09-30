@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
         if (spi.controller.BDown)
         {   
-            if(holding == true)
+            if(holding == true && rockBody != null)
             {
                 //drop the rock
                 rockBody.useGravity = true;
