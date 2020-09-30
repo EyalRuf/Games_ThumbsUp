@@ -133,8 +133,6 @@ public class PlayerController : MonoBehaviour
             Quaternion rot = Quaternion.FromToRotation(transform.up, Vector3.up);
             rb.AddTorque(new Vector3(rot.x, rot.y, rot.z) * stayUprightSpeed * Time.fixedDeltaTime);
 
-
-
             //physics based movement and dashing
             direction = new Vector3(spi.controller.Joystick_Left.x, 0, spi.controller.Joystick_Left.y);
             rb.MovePosition(
