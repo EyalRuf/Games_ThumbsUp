@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Rock pickup
-        if (holding == true)
+        if (holding)
         {
             //Move with the player
             rockBody.MovePosition(Vector3.Lerp(rockBody.position, transform.position + transform.forward * holdingDistance, holdingSpeed * Time.deltaTime));
@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
         if (spi.controller.BDown)
         {   
-            if(holding == true)
+            if(holding)
             {
                 //drop the rock
                 rockBody.useGravity = true;
@@ -132,8 +132,6 @@ public class PlayerController : MonoBehaviour
             //keep player upright
             Quaternion rot = Quaternion.FromToRotation(transform.up, Vector3.up);
             rb.AddTorque(new Vector3(rot.x, rot.y, rot.z) * stayUprightSpeed * Time.fixedDeltaTime);
-
-
 
             //physics based movement and dashing
             direction = new Vector3(spi.controller.Joystick_Left.x, 0, spi.controller.Joystick_Left.y);
