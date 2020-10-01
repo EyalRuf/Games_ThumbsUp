@@ -30,7 +30,27 @@ public class PlayerAnimations : MonoBehaviour
     void Update()
     {
         animator.SetBool(ANIM_PARAM_NAME_WALK, isWalking);
-        animator.SetBool(ANIM_PARAM_NAME_JUMP, isJumping);
+        
+        if (this.isJumping)
+        {
+            startJumpAnimation();
+            this.isJumping = false;
+        }
+
+        if (this.isCarrying)
+        {
+            setCarryAnimation(!animator.GetBool(ANIM_PARAM_NAME_CARRY));
+            this.isCarrying = false;
+        }
+    }
+
+    void startJumpAnimation ()
+    {
+        animator.SetTrigger(ANIM_PARAM_NAME_JUMP);
+    }
+
+    void setCarryAnimation (bool isCarrying)
+    {
         animator.SetBool(ANIM_PARAM_NAME_CARRY, isCarrying);
     }
 }

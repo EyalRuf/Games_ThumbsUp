@@ -6,16 +6,16 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     
-    public TextMesh redScoreUI;
+    public Text redScoreUI;
     private float redScore;
 
-    public TextMesh blueScoreUI;
+    public Text blueScoreUI;
     private float blueScore;
 
-    public TextMesh yellowScoreUI;
+    public Text yellowScoreUI;
     private float yellowScore;
 
-    public TextMesh greenScoreUI;
+    public Text greenScoreUI;
     private float greenScore;
 
     public Text winText;
