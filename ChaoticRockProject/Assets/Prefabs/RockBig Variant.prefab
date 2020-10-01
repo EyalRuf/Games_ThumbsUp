@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 1916461774939939912, guid: 975cc741664e6804383a652213f64a5c,
         type: 3}
       propertyPath: m_Name
-      value: RockBig
+      value: RockBig Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1916461774939939917, guid: 975cc741664e6804383a652213f64a5c,
         type: 3}
@@ -71,6 +71,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mass
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2976243786478351478, guid: 975cc741664e6804383a652213f64a5c,
+        type: 3}
+      propertyPath: score
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9046278373348053915, guid: 975cc741664e6804383a652213f64a5c,
         type: 3}

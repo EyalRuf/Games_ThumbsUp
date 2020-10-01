@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 1916461774939939912, guid: 975cc741664e6804383a652213f64a5c,
         type: 3}
       propertyPath: m_Name
-      value: RockHuge
+      value: RockHuge Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1916461774939939917, guid: 975cc741664e6804383a652213f64a5c,
         type: 3}
@@ -86,6 +86,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mass
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2976243786478351478, guid: 975cc741664e6804383a652213f64a5c,
+        type: 3}
+      propertyPath: score
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 975cc741664e6804383a652213f64a5c, type: 3}

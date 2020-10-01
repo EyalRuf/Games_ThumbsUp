@@ -172,7 +172,7 @@ public class PlayerController : MonoBehaviour
                 if (!otherPlayer.stunned)
                 {
                     //calculate knockback for other player
-                    Vector3 knockback = (collision.transform.position - transform.position).normalized * dashingKnockBack;
+                    Vector3 knockback = (collision.transform.position - transform.position).normalized;
 
                     //stun
                     otherPlayer.Stun(knockback);
@@ -189,7 +189,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Stun(Vector3 knockback)
+    public void Stun(Vector3 knockbackDirection)
     {
         //if holding rock drop it
         if(rockBody != null)
@@ -201,6 +201,6 @@ public class PlayerController : MonoBehaviour
         stunCounter = stunDuration;
         stunned = true;
 
-        rb.AddForce(knockback, ForceMode.Acceleration);
+        rb.AddForce(knockbackDirection * dashingKnockBack, ForceMode.Acceleration);
     }
 }
