@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ddd1dc7655cef54449d051deaa463d13
+guid: b16f9f559d1f41e46a4801e1a9f40c16
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
@@ -15,6 +15,12 @@ ModelImporter:
   - first:
       74: 6926420539829495022
     second: Armature|jumpHold
+  - first:
+      74: -2486048477602981049
+    second: Armature|Rdash
+  - first:
+      74: 796510352958924783
+    second: Armature|smash
   - first:
       74: -4799524434163024911
     second: Armature|walk
