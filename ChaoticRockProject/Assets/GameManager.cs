@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
     private float greenScore;
 
     public Text winText;
-    public float points;
     public float maxPoints;
 
     //Timer
@@ -44,19 +43,31 @@ public class GameManager : MonoBehaviour
             timer.text = Mathf.Floor(minute) + " : " + Mathf.Floor(second);
         }
         else
+        {
             MostPointsCheck();
+        }
     }
 
-    public void AddScore(string deliver)
+    public void AddScore(int player, int amount)
     {
-        if (deliver == "BlueDeliver")
-            blueScore += points;
-        if (deliver == "RedDeliver")
-            redScore += points;
-        if (deliver == "GreenDeliver")
-            greenScore += points;
-        if (deliver == "YellowDeliver")
-            yellowScore += points;
+        switch (player)
+        {
+            case 0:
+                redScore += amount;
+                break;
+
+            case 1:
+                blueScore += amount;
+                break;
+
+            case 2:
+                yellowScore += amount;
+                break;
+
+            case 3:
+                greenScore += amount;
+                break;
+        }
 
         UpdateScore();
         CheckWin();

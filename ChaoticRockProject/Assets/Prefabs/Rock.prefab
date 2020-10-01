@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1916461774939939918}
   - component: {fileID: 1916461774939939919}
   - component: {fileID: 2649598395351080688}
-  - component: {fileID: 4653976853777232136}
+  - component: {fileID: 2976243786478351478}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Rock
@@ -125,7 +125,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4653976853777232136
+--- !u!114 &2976243786478351478
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,10 +134,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1916461774939939912}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24151df0d408168449b5cb67ab0d5a08, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b1cc662dde64d142a4b24e5d5330bca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyRockDelay: 1
+  score: 10
+  stunVelocity: 15
+  currentVelocity: 0
 --- !u!1 &9046278373348053915
 GameObject:
   m_ObjectHideFlags: 0
