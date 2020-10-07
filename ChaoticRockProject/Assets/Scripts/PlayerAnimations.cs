@@ -1,56 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimations : MonoBehaviour
 {
     const string ANIM_PARAM_NAME_WALK = "walk";
     const string ANIM_PARAM_NAME_JUMP = "jump";
-    const string ANIM_PARAM_NAME_CARRY = "carrying";
+    const string ANIM_PARAM_NAME_HOLDING = "holding";
 
-    [SerializeField]
-    private Animator animator;
-
-    [SerializeField]
-    private bool isWalking;
-    [SerializeField]
-    private bool isCarrying;
-    [SerializeField]
-    private bool isJumping;
-
+    [SerializeField] private Animator animator;
+    [SerializeField] public bool isWalking { get; set; }
+    
     void Start()
     {
         isWalking = false;
-        isCarrying = false;
-        isJumping = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        animator.SetBool(ANIM_PARAM_NAME_WALK, isWalking);
-        
-        if (this.isJumping)
-        {
-            startJumpAnimation();
-            this.isJumping = false;
-        }
-
-        if (this.isCarrying)
-        {
-            setCarryAnimation(!animator.GetBool(ANIM_PARAM_NAME_CARRY));
-            this.isCarrying = false;
-        }
+        if (isWalking != animator.GetBool(ANIM_PARAM_NAME_WALK))
+            animator.SetBool(ANIM_PARAM_NAME_WALK, isWalking);
     }
 
-    void startJumpAnimation ()
+    public void TriggerJumpAnimation ()
     {
         animator.SetTrigger(ANIM_PARAM_NAME_JUMP);
     }
 
-    void setCarryAnimation (bool isCarrying)
+    public void ToggleCarryAnimation ()
     {
-        animator.SetBool(ANIM_PARAM_NAME_CARRY, isCarrying);
+        animator.SetBool(ANIM_PARAM_NAME_HOLDING, !animator.GetBool(ANIM_PARAM_NAME_HOLDING));
     }
 }

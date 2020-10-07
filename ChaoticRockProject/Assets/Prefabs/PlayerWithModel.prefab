@@ -143,9 +143,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5479002896194033108}
-  isWalking: 0
-  isCarrying: 0
-  isJumping: 0
 --- !u!1 &2616255298392735824
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,6 +422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f3103bdd3fd71a45bb987aeb2c87fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAnim: {fileID: 82691317101269832}
   stunned: 0
   dashing: 0
   grounded: 0
@@ -457,8 +455,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1
-  m_Height: 2.3
+  m_Radius: 0.75
+  m_Height: 1.75
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &5429441464858858954
