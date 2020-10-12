@@ -397,7 +397,7 @@ MonoBehaviour:
   pickupRange: 4
   holdingDistance: 3
   holdingSpeed: 10
-  throwSpeed: 750
+  throwSpeed: 2000
   floorMask:
     serializedVersion: 2
     m_Bits: 55

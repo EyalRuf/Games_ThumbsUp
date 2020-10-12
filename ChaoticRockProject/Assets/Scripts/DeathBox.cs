@@ -11,7 +11,7 @@ public class DeathBox : MonoBehaviour
         if (other.CompareTag("Player") || other.CompareTag("Rock"))
         {
             other.tag = "Dead";
-            Destroy(other.gameObject, deathDelay);
+            Destroy(other.gameObject, deathDelay); 
         }
     }
 }

@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class ScorePoint : MonoBehaviour
 {
+    public int belongToPlayer;
     private GameManager gm;
-
-    public float destroyRockDelay;
 
     void Start()
     {
@@ -16,12 +15,12 @@ public class ScorePoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        gm.AddScore(col.name);
-        DestroySelf();
-    }
+        if (col.CompareTag("Rock"))
+        {
+            gm.AddScore(belongToPlayer, col.gameObject.GetComponent<RockBehavior>().score);
 
-    void DestroySelf()
-    {
-        Destroy(gameObject);
+            //either destroy or shrink rock
+            Destroy(col.gameObject);
+        }
     }
 }

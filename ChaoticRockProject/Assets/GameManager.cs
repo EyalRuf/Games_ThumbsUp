@@ -1,26 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     
-    public TextMesh redScoreUI;
+    public Text redScoreUI;
     private float redScore;
 
-    public TextMesh blueScoreUI;
+    public Text blueScoreUI;
     private float blueScore;
 
-    public TextMesh yellowScoreUI;
+    public Text yellowScoreUI;
     private float yellowScore;
 
-    public TextMesh greenScoreUI;
+    public Text greenScoreUI;
     private float greenScore;
 
     public Text winText;
-    public float points;
     public float maxPoints;
+
+    public Button restartBtn;
 
     //Timer
     public Text timer;
@@ -44,19 +47,36 @@ public class GameManager : MonoBehaviour
             timer.text = Mathf.Floor(minute) + " : " + Mathf.Floor(second);
         }
         else
+        {
             MostPointsCheck();
+        }
+
+        if (Keyboard.current[Key.R].wasPressedThisFrame)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
-    public void AddScore(string deliver)
+    public void AddScore(int player, int amount)
     {
-        if (deliver == "BlueDeliver")
-            blueScore += points;
-        if (deliver == "RedDeliver")
-            redScore += points;
-        if (deliver == "GreenDeliver")
-            greenScore += points;
-        if (deliver == "YellowDeliver")
-            yellowScore += points;
+        switch (player)
+        {
+            case 0:
+                redScore += amount;
+                break;
+
+            case 1:
+                blueScore += amount;
+                break;
+
+            case 2:
+                yellowScore += amount;
+                break;
+
+            case 3:
+                greenScore += amount;
+                break;
+        }
 
         UpdateScore();
         CheckWin();
@@ -72,7 +92,7 @@ public class GameManager : MonoBehaviour
 
     void CheckWin()
     {
-        if (redScore >= 5) {
+        if (redScore >= maxPoints) {
             winText.text = "Red has won!";
             GameEnded();
         }
