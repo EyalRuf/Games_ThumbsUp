@@ -5,7 +5,8 @@ namespace Assets
 {
     public class WindEnvEvent : EnvEvent
     {
-      
+        public Vector3 windDirection;
+        public float windStrength;
 
         // Use this for initialization
         void Start()
@@ -22,11 +23,18 @@ namespace Assets
         public override void StartEnvEvent()
         {
             Debug.Log("StartWindEffect");
+            this.gameObject.SetActive(true);
         }
 
         public override void EndEnvEvent()
         {
             Debug.Log("EndWindEffect");
+            this.gameObject.SetActive(false);
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            other.GetComponent<Rigidbody>().AddForce(windDirection * windStrength);
         }
     }
 }
