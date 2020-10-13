@@ -63,7 +63,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 15
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -99,12 +99,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081862a0ab6d9a942bc695ee43998824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetTags:
+  - Rock
+  - Player
   targets: []
   offset: {x: 0, y: 25, z: -25}
   smoothTime: 0.25
-  minZoom: 7.5
+  minZoom: 10
   maxZoom: 50
-  zoomSpeed: 10000
+  zoomSpeed: 100
 --- !u!114 &2849981868695565045
 MonoBehaviour:
   m_ObjectHideFlags: 0
