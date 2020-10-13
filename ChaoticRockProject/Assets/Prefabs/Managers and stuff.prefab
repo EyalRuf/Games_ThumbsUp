@@ -1214,6 +1214,7 @@ MonoBehaviour:
   - {fileID: 3190235393071678189, guid: 2041023138aac4e4789c98498bf6961c, type: 3}
   - {fileID: 7875333412599550945, guid: 74eb83a95afe6544593216f7d8d8ccd7, type: 3}
   - {fileID: 9045379471574056234, guid: 54ef85bcb42b2c442a9a25fcb66f4f4a, type: 3}
+  - {fileID: 3318890752787198618, guid: 995a84ae4b27d4b4ca5bab94fa1dea3a, type: 3}
   rockSpawnPositions:
   - {fileID: 411095950871359394}
   - {fileID: 411095950161395166}

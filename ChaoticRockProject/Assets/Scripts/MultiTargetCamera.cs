@@ -5,7 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class MultiTargetCamera : MonoBehaviour
 {
-    public GameObject[] targets;
+    public string[] targetTags;
+    public List<GameObject> targets = new List<GameObject>();
 
     public Vector3 offset;
     public float smoothTime = .5f;
@@ -25,12 +26,18 @@ public class MultiTargetCamera : MonoBehaviour
 
     private void Update()
     {
-        targets = GameObject.FindGameObjectsWithTag("Player");
+        //gather all targets by tags
+        targets.Clear();
+
+        foreach(string tag in targetTags)
+        {
+            targets.AddRange(GameObject.FindGameObjectsWithTag(tag));
+        }
     }
 
     private void LateUpdate()
     {
-        if (targets.Length != 0)
+        if (targets.Count != 0)
         {
             Move();
             Zoom();
@@ -52,7 +59,7 @@ public class MultiTargetCamera : MonoBehaviour
     float GetGreatestDistance()
     {
         var bounds = new Bounds(targets[0].transform.position, Vector3.zero);
-        for (int i = 0; i < targets.Length; i++)
+        for (int i = 0; i < targets.Count; i++)
         {
 
             bounds.Encapsulate(targets[i].transform.position);
@@ -65,13 +72,13 @@ public class MultiTargetCamera : MonoBehaviour
 
     Vector3 GetCenterPoint()
     {
-        if (targets.Length == 1)
+        if (targets.Count == 1)
         {
             return targets[0].transform.position;
         }
 
         var bounds = new Bounds(targets[0].transform.position, Vector3.zero);
-        for (int i = 0; i < targets.Length; i++)
+        for (int i = 0; i < targets.Count; i++)
         {
             bounds.Encapsulate(targets[i].transform.position);
         }
