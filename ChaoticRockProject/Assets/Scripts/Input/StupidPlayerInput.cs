@@ -123,7 +123,7 @@ public class StupidController
             );
 
             //read buttons
-            StartDown = Keyboard.current[DebugKeys[8]].wasPressedThisFrame;
+            StartDown = Keyboard.current[DebugKeys[8]].wasPressedThisFrame; 
             Start = Keyboard.current[DebugKeys[8]].isPressed;
             StartUP = Keyboard.current[DebugKeys[8]].wasReleasedThisFrame;
 
@@ -139,7 +139,7 @@ public class StupidController
             B = Keyboard.current[DebugKeys[11]].isPressed;
             BUP = Keyboard.current[DebugKeys[11]].wasReleasedThisFrame;
 
-            XDown = Keyboard.current[DebugKeys[11]].wasPressedThisFrame;
+            XDown = Keyboard.current[DebugKeys[12]].wasPressedThisFrame;
             X = Keyboard.current[DebugKeys[12]].isPressed;
             XUP = Keyboard.current[DebugKeys[12]].wasReleasedThisFrame;
 

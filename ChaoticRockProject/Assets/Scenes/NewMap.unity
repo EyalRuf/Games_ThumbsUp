@@ -188,54 +188,58 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2849981868695565051, guid: b7b6109f9176d9d46b5fd075e2cb8f12,
+        type: 3}
+      propertyPath: ditherTexture
+      value: 
+      objectReference: {fileID: 312350187}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7b6109f9176d9d46b5fd075e2cb8f12, type: 3}
---- !u!1 &305030795
-GameObject:
+  
+--- !u!28 &312350187
+Texture2D:
+
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 305030797}
-  - component: {fileID: 305030796}
-  m_Layer: 0
-  m_Name: EnvEventManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &305030796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 305030795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9380b43373d892f4e995ce2568c21935, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  envEventCounter: 0
-  envEvent: {fileID: 1919426627}
-  isEventActive: 0
---- !u!4 &305030797
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 305030795}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.4359274, y: -0.6158846, z: 3.6421642}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 4
+  m_Height: 4
+  m_CompleteImageSize: 84
+  m_TextureFormat: 5
+  m_MipCount: 3
+  m_IsReadable: 1
+  m_IgnoreMasterTextureLimit: 0
+  m_IsPreProcessed: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 0
+  image data: 84
+  _typelessdata: 080808088888888828282828a8a8a8a8c8c8c8c848484848e8e8e8e86868686838383838b8b8b8b81818181898989898f8f8f8f878787878d8d8d8d8585858586868686888888888989898987878787880808080
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 
+
 --- !u!1 &378806496
 GameObject:
   m_ObjectHideFlags: 0
