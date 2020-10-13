@@ -128,6 +128,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2215970159004196788, guid: b7b6109f9176d9d46b5fd075e2cb8f12,
+        type: 3}
+      propertyPath: TrailModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2215970159004196788, guid: b7b6109f9176d9d46b5fd075e2cb8f12,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2215970159004196788, guid: b7b6109f9176d9d46b5fd075e2cb8f12,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2849981868695565042, guid: b7b6109f9176d9d46b5fd075e2cb8f12,
         type: 3}
       propertyPath: m_Name
@@ -193,12 +208,35 @@ PrefabInstance:
       propertyPath: ditherTexture
       value: 
       objectReference: {fileID: 312350187}
+    - target: {fileID: 4138144218256394250, guid: b7b6109f9176d9d46b5fd075e2cb8f12,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.93704927
+      objectReference: {fileID: 0}
+    - target: {fileID: 4138144218256394250, guid: b7b6109f9176d9d46b5fd075e2cb8f12,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.34919724
+      objectReference: {fileID: 0}
+    - target: {fileID: 4138144218256394250, guid: b7b6109f9176d9d46b5fd075e2cb8f12,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -139.124
+      objectReference: {fileID: 0}
+    - target: {fileID: 4138144218256394250, guid: b7b6109f9176d9d46b5fd075e2cb8f12,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4138144218256394250, guid: b7b6109f9176d9d46b5fd075e2cb8f12,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 35.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7b6109f9176d9d46b5fd075e2cb8f12, type: 3}
-  
 --- !u!28 &312350187
 Texture2D:
-
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -210,19 +248,19 @@ Texture2D:
   m_ForcedFallbackFormat: 4
   m_DownscaleFallback: 0
   serializedVersion: 2
-  m_Width: 4
-  m_Height: 4
-  m_CompleteImageSize: 84
-  m_TextureFormat: 5
-  m_MipCount: 3
+  m_Width: 0
+  m_Height: 0
+  m_CompleteImageSize: 0
+  m_TextureFormat: 0
+  m_MipCount: 1
   m_IsReadable: 1
   m_IgnoreMasterTextureLimit: 0
   m_IsPreProcessed: 0
   m_StreamingMipmaps: 0
   m_StreamingMipmapsPriority: 0
   m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
+  m_ImageCount: 0
+  m_TextureDimension: 0
   m_TextureSettings:
     serializedVersion: 2
     m_FilterMode: 1
@@ -233,13 +271,12 @@ Texture2D:
     m_WrapW: 0
   m_LightmapFormat: 0
   m_ColorSpace: 0
-  image data: 84
-  _typelessdata: 080808088888888828282828a8a8a8a8c8c8c8c848484848e8e8e8e86868686838383838b8b8b8b81818181898989898f8f8f8f878787878d8d8d8d8585858586868686888888888989898987878787880808080
+  image data: 0
+  _typelessdata: 
   m_StreamData:
     offset: 0
     size: 0
     path: 
-
 --- !u!1 &378806496
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,7 +950,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2049585521
 GameObject:
