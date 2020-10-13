@@ -1,25 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     
-    public TextMesh redScoreUI;
+    public Text redScoreUI;
     private float redScore;
 
-    public TextMesh blueScoreUI;
+    public Text blueScoreUI;
     private float blueScore;
 
-    public TextMesh yellowScoreUI;
+    public Text yellowScoreUI;
     private float yellowScore;
 
-    public TextMesh greenScoreUI;
+    public Text greenScoreUI;
     private float greenScore;
 
     public Text winText;
     public float maxPoints;
+
+    public Button restartBtn;
 
     //Timer
     public Text timer;
@@ -45,6 +49,11 @@ public class GameManager : MonoBehaviour
         else
         {
             MostPointsCheck();
+        }
+
+        if (Keyboard.current[Key.R].wasPressedThisFrame)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
