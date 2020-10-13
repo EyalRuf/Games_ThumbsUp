@@ -919,6 +919,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1919426628}
   - component: {fileID: 1919426627}
+  - component: {fileID: 1919426629}
   m_Layer: 0
   m_Name: WindEvent
   m_TagString: Untagged
@@ -938,6 +939,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2cc69c91e58762478c647e02a8064cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  windDirection: {x: 1, y: 0, z: 0}
+  windStrength: 10
 --- !u!4 &1919426628
 Transform:
   m_ObjectHideFlags: 0
@@ -946,12 +949,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1919426626}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.4359274, y: -0.6158846, z: 3.6421642}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 80, y: 50, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1919426629
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919426626}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2049585521
 GameObject:
   m_ObjectHideFlags: 0
