@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(EnvEvent))]
 public class EnvEventManager : MonoBehaviour
 {
     [SerializeField] private float envEventCounter = 0;

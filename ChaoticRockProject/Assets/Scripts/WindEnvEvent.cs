@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 namespace Assets
 {
@@ -7,34 +8,24 @@ namespace Assets
     {
         public Vector3 windDirection;
         public float windStrength;
-
-        // Use this for initialization
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+        private float gradualWind = 0;
+        [SerializeField] private float windGradualFactor = 0.01f;
 
         public override void StartEnvEvent()
         {
-            Debug.Log("StartWindEffect");
             this.gameObject.SetActive(true);
+            gradualWind = 0;
         }
 
         public override void EndEnvEvent()
         {
-            Debug.Log("EndWindEffect");
             this.gameObject.SetActive(false);
         }
 
         private void OnTriggerStay(Collider other)
         {
-            other.GetComponent<Rigidbody>().AddForce(windDirection * windStrength);
+            gradualWind = Mathf.Lerp(gradualWind, windStrength, windGradualFactor);
+            other.GetComponent<Rigidbody>().AddForce(windDirection * gradualWind);
         }
     }
 }
