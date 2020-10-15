@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
     public float throwSpeed;
     private Rigidbody rockBody;
+    private float rockThrowDelay = 0.5f;
 
     [Header("Stunning")]
     public LayerMask floorMask;
@@ -99,18 +100,18 @@ public class PlayerController : MonoBehaviour
             //Throw the rock
             if (spi.controller.YDown)
             {
-                rockBody.useGravity = true;
-                holding = false;
-                rockBody.AddForce(transform.forward * throwSpeed, ForceMode.Acceleration); //changed to acceleration to add force independent of mass
+                StartCoroutine(this.ThrowRock());
                 if (playerAnim != null)
-                    playerAnim.ToggleCarryAnimation();
+                {
+                    playerAnim.TriggerThrowAnimation();
+                }
             }
         }
 
         if (spi.controller.BDown)
         {
             bool prevHolding = holding;
-            if(holding && rockBody != null)
+            if (holding && rockBody != null)
             {
                 //drop the rock
                 rockBody.useGravity = true;
@@ -129,13 +130,21 @@ public class PlayerController : MonoBehaviour
                     }
                 }
             }
-            
+
             if (prevHolding != holding)
             {
                 if (playerAnim != null)
                     playerAnim.ToggleCarryAnimation();
             }
         }
+    }
+
+    private IEnumerator ThrowRock ()
+    {
+        yield return new WaitForSeconds(rockThrowDelay);
+        holding = false;
+        rockBody.useGravity = true;
+        rockBody.AddForce(transform.forward* throwSpeed, ForceMode.Acceleration); //changed to acceleration to add force independent of mass
     }
 
     private void FixedUpdate()

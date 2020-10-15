@@ -148,6 +148,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Default Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 2849981868695565044, guid: b7b6109f9176d9d46b5fd075e2cb8f12,
+        type: 3}
+      propertyPath: zoomSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2849981868695565044, guid: b7b6109f9176d9d46b5fd075e2cb8f12,
+        type: 3}
+      propertyPath: smoothTime
+      value: 0.55
+      objectReference: {fileID: 0}
     - target: {fileID: 2849981868695565047, guid: b7b6109f9176d9d46b5fd075e2cb8f12,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -467,6 +477,30 @@ PrefabInstance:
       propertyPath: windGradualFactor
       value: 0.005
       objectReference: {fileID: 0}
+    - target: {fileID: 411095950957322585, guid: 4a7e005b03908b9408c296dac5592f38,
+        type: 3}
+      propertyPath: player0Prefab
+      value: 
+      objectReference: {fileID: 174938873039612772, guid: ca9c888aef85a144f8d31bcb9fb6db54,
+        type: 3}
+    - target: {fileID: 411095950957322585, guid: 4a7e005b03908b9408c296dac5592f38,
+        type: 3}
+      propertyPath: player1Prefab
+      value: 
+      objectReference: {fileID: 9088667658499215045, guid: 726033d606873634c821274cd11813c0,
+        type: 3}
+    - target: {fileID: 411095950957322585, guid: 4a7e005b03908b9408c296dac5592f38,
+        type: 3}
+      propertyPath: player2Prefab
+      value: 
+      objectReference: {fileID: 4546393614839288971, guid: daaf4f3a09470c545bf154ba5dce8918,
+        type: 3}
+    - target: {fileID: 411095950957322585, guid: 4a7e005b03908b9408c296dac5592f38,
+        type: 3}
+      propertyPath: player3Prefab
+      value: 
+      objectReference: {fileID: 2495478164366604508, guid: 77e74beb8506feb42b5e503852b10c9d,
+        type: 3}
     - target: {fileID: 8730605606832997737, guid: 4a7e005b03908b9408c296dac5592f38,
         type: 3}
       propertyPath: m_LocalPosition.x
