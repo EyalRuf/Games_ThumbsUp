@@ -465,7 +465,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1919426627, guid: 4a7e005b03908b9408c296dac5592f38, type: 3}
       propertyPath: windStrength
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8730605606832997737, guid: 4a7e005b03908b9408c296dac5592f38,
         type: 3}
