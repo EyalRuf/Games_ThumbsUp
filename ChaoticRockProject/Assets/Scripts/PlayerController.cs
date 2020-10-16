@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(StupidPlayerInput)), RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(StupidPlayerInput)), RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(PlayerAnimations))]
 public class PlayerController : MonoBehaviour
 {
+    [Header("Other player scripts")]
+    [SerializeField] private PlayerAnimations playerAnim;
+
     [Header("State")]
     public bool stunned;
     public bool dashing;
@@ -70,6 +73,8 @@ public class PlayerController : MonoBehaviour
         if (grounded && spi.controller.ADown)
         {
             rb.AddForce(Vector3.up * jumpingForce, ForceMode.Acceleration);
+            if (playerAnim != null)
+                playerAnim.TriggerJumpAnimation();
         }
 
         //Dashing
@@ -85,7 +90,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Rock pickup
-        if (holding == true && rockBody != null)
+        if (holding && rockBody != null)
         {
             //Move with the player
             rockBody.MovePosition(Vector3.Lerp(rockBody.position, transform.position + transform.forward * holdingDistance, holdingSpeed * Time.deltaTime));
@@ -97,12 +102,15 @@ public class PlayerController : MonoBehaviour
                 rockBody.useGravity = true;
                 holding = false;
                 rockBody.AddForce(transform.forward * throwSpeed, ForceMode.Acceleration); //changed to acceleration to add force independent of mass
+                if (playerAnim != null)
+                    playerAnim.ToggleCarryAnimation();
             }
         }
 
         if (spi.controller.BDown)
-        {   
-            if(holding == true && rockBody != null)
+        {
+            bool prevHolding = holding;
+            if(holding && rockBody != null)
             {
                 //drop the rock
                 rockBody.useGravity = true;
@@ -121,11 +129,19 @@ public class PlayerController : MonoBehaviour
                     }
                 }
             }
+            
+            if (prevHolding != holding)
+            {
+                if (playerAnim != null)
+                    playerAnim.ToggleCarryAnimation();
+            }
         }
     }
 
     private void FixedUpdate()
     {
+        bool isWalking = false;
+
         //if not stunned
         if (!stunned)
         {
@@ -135,13 +151,14 @@ public class PlayerController : MonoBehaviour
 
             //physics based movement and dashing
             direction = new Vector3(spi.controller.Joystick_Left.x, 0, spi.controller.Joystick_Left.y);
-            rb.MovePosition(
-                rb.position + 
-                    (
-                        (direction * movementSpeed + 
-                        (dashing ? (direction * additionalDashSpeed) : Vector3.zero)
-                    ) * Time.fixedDeltaTime)
-                );
+            Vector3 movementVector = ((direction * movementSpeed) +
+                        (dashing ? (direction * additionalDashSpeed) : Vector3.zero)) 
+                        * Time.fixedDeltaTime;
+
+            rb.MovePosition(rb.position + movementVector);
+
+            // Setting player walk animation according to weather we're moving
+            isWalking = movementVector != Vector3.zero;
 
             //physics based rotation
             Vector3 newRotationDirection = new Vector3(spi.controller.JoystickRaw_Left.x, 0, spi.controller.JoystickRaw_Left.y);
@@ -158,6 +175,9 @@ public class PlayerController : MonoBehaviour
                 rb.MoveRotation(smoothedRotation);
             }
         }
+
+        if (playerAnim != null)
+            playerAnim.isWalking = isWalking;
     }
 
     private void OnCollisionEnter(Collision collision)
