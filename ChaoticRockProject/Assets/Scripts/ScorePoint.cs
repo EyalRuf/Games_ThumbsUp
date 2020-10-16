@@ -17,7 +17,7 @@ public class ScorePoint : MonoBehaviour
     {
         if (col.CompareTag("Rock"))
         {
-            gm.AddScore(belongToPlayer, col.gameObject.GetComponent<RockBehavior>().score);
+            //gm.AddScore(belongToPlayer, col.gameObject.GetComponent<RockBehavior>().score);
 
             //either destroy or shrink rock
             Destroy(col.gameObject);

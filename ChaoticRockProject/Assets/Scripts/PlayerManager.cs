@@ -19,21 +19,6 @@ public class PlayerManager : MonoBehaviour
     public Transform player2Spawn;
     public Transform player3Spawn;
 
-    [Header("Cooldowns")]
-    public float respawnCooldown;
-
-    private float player0Cooldown;
-    private bool player0respawning;
-
-    private float player1Cooldown;
-    private bool player1respawning;
-
-    private float player2Cooldown;
-    private bool player2respawning;
-
-    private float player3Cooldown;
-    private bool player3respawning;
-
     //player references
     private GameObject player0;
     private GameObject player1;
@@ -49,114 +34,54 @@ public class PlayerManager : MonoBehaviour
         player3 = Instantiate(player3Prefab, player3Spawn.position, player3Spawn.rotation);
     }
 
-    private void Update()
+    public void RespawnAll()
     {
-        //PLAYER 0
-        //if player has died/been destroyed
-        if (player0 == null)
+        //despawn any left over players
+        if (player0 != null)
         {
-            if (player0respawning)
-            {
-                //if player is respawning
-                if(player0Cooldown < 0)
-                {
-                    //if cooldown has worn off spawn player back in
-                    player0 = Instantiate(player0Prefab, player0Spawn.position, player0Spawn.rotation);
-                    player0respawning = false;
-                }
-                else
-                {
-                    //otherwise wear off cooldown
-                    player0Cooldown -= Time.deltaTime;
-                }
-            }
-            else
-            {
-                //otherwise player is respawning and cooldown is set
-                player0respawning = true;
-                player0Cooldown = respawnCooldown;
-            }
+            Destroy(player0);
+        }
+        if (player1 != null)
+        {
+            Destroy(player1);
+        }
+        if (player2 != null)
+        {
+            Destroy(player2);
+        }
+        if (player3 != null)
+        {
+            Destroy(player3);
         }
 
-        //PLAYER 1
-        //if player has died/been destroyed
-        if (player1 == null)
+        //respawn all players at start positions
+        player0 = Instantiate(player0Prefab, player0Spawn.position, player0Spawn.rotation);
+        player1 = Instantiate(player1Prefab, player1Spawn.position, player1Spawn.rotation);
+        player2 = Instantiate(player2Prefab, player2Spawn.position, player2Spawn.rotation);
+        player3 = Instantiate(player3Prefab, player3Spawn.position, player3Spawn.rotation);
+    }
+
+    public bool OnePlayerAlive(out int lastPlayerIndex)
+    {
+        int playersAlive = (player0 == null ? 0 : 1) + (player1 == null ? 0 : 1) + (player2 == null ? 0 : 1) + (player3 == null ? 0 : 1);
+
+        if (player0 != null)
         {
-            if (player1respawning)
-            {
-                //if player is respawning
-                if (player1Cooldown < 0)
-                {
-                    //if cooldown has worn off spawn player back in
-                    player1 = Instantiate(player1Prefab, player1Spawn.position, player1Spawn.rotation);
-                    player1respawning = false;
-                }
-                else
-                {
-                    //otherwise wear off cooldown
-                    player1Cooldown -= Time.deltaTime;
-                }
-            }
-            else
-            {
-                //otherwise player is respawning and cooldown is set
-                player1respawning = true;
-                player1Cooldown = respawnCooldown;
-            }
+            lastPlayerIndex = 0;
+        }
+        else if (player1 != null)
+        {
+            lastPlayerIndex = 1;
+        }
+        else if (player2 != null)
+        {
+            lastPlayerIndex = 2;
+        }
+        else
+        {
+            lastPlayerIndex = 3;
         }
 
-        //PLAYER 2
-        //if player has died/been destroyed
-        if (player2 == null)
-        {
-            if (player2respawning)
-            {
-                //if player is respawning
-                if (player2Cooldown < 0)
-                {
-                    //if cooldown has worn off spawn player back in
-                    player2 = Instantiate(player2Prefab, player2Spawn.position, player2Spawn.rotation);
-                    player2respawning = false;
-                }
-                else
-                {
-                    //otherwise wear off cooldown
-                    player2Cooldown -= Time.deltaTime;
-                }
-            }
-            else
-            {
-                //otherwise player is respawning and cooldown is set
-                player2respawning = true;
-                player2Cooldown = respawnCooldown;
-            }
-        }
-
-        //PLAYER 3
-        //if player has died/been destroyed
-        if (player3 == null)
-        {
-            if (player3respawning)
-            {
-                //if player is respawning
-                if (player3Cooldown < 0)
-                {
-                    //if cooldown has worn off spawn player back in
-                    player3 = Instantiate(player3Prefab, player3Spawn.position, player3Spawn.rotation);
-                    player3respawning = false;
-                }
-                else
-                {
-                    //otherwise wear off cooldown
-                    player3Cooldown -= Time.deltaTime;
-                }
-            }
-            else
-            {
-                //otherwise player is respawning and cooldown is set
-                player3respawning = true;
-                player3Cooldown = respawnCooldown;
-            }
-        }
+        return playersAlive <= 1;
     }
 }

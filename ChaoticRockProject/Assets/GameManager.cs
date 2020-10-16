@@ -7,135 +7,117 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    
-    public Text redScoreUI;
-    private float redScore;
+    [Header("Game settings")]
+    public int firstTo;
+    public float timeBetweenRounds = 2;
+    private bool roundOver = false;
+    private float roundOverTimer = 0;
 
-    public Text blueScoreUI;
-    private float blueScore;
+    [Header("Scores")]
+    public int player0Score;
+    public int player1Score;
+    public int player2Score;
+    public int player3Score;
 
-    public Text yellowScoreUI;
-    private float yellowScore;
-
-    public Text greenScoreUI;
-    private float greenScore;
-
+    [Header("References")]
     public Text winText;
-    public float maxPoints;
+    public Text player0ScoreText;
+    public Text player1ScoreText;
+    public Text player2ScoreText;
+    public Text player3ScoreText;
 
-    public Button restartBtn;
+    private string[] playerNames = { "Red", "Blue", "Yellow", "Green" };
+    private PlayerManager playerManager;
 
-    //Timer
-    public Text timer;
-    public float startTime;
-    private float currentTime;
-
-    void Start()
+    private void Start()
     {
-        currentTime = startTime;
-        //spawn rocks randomly maybe.
+        playerManager = GetComponent<PlayerManager>();
     }
 
     private void Update()
     {
-        //Timer counter
-        if (currentTime > 0)
+        if (!roundOver)
         {
-            currentTime -= 1 * Time.deltaTime;
-            float minute = currentTime / 60;
-            float second = (minute % 1) * 60;
-            timer.text = Mathf.Floor(minute) + " : " + Mathf.Floor(second);
+            int survivingPlayerIndex;
+            if (playerManager.OnePlayerAlive(out survivingPlayerIndex))
+            {
+                //add score
+                switch (survivingPlayerIndex)
+                {
+                    case 0:
+                        player0Score++;
+                        break;
+
+                    case 1:
+                        player1Score++;
+                        break;
+
+                    case 2:
+                        player2Score++;
+                        break;
+
+                    case 3:
+                        player3Score++;
+                        break;
+                }
+
+                roundOver = true;
+                roundOverTimer = timeBetweenRounds;
+
+                player0ScoreText.text = player0Score.ToString();
+                player1ScoreText.text = player1Score.ToString();
+                player2ScoreText.text = player2Score.ToString();
+                player3ScoreText.text = player3Score.ToString();
+            }
         }
         else
         {
-            MostPointsCheck();
-        }
-
-        if (Keyboard.current[Key.R].wasPressedThisFrame)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            roundOverTimer -= Time.deltaTime;
+            if(roundOverTimer < 0)
+            {
+                int playerWon;
+                if (PlayerWon(out playerWon))
+                {
+                    winText.text = playerNames[playerWon] + " has won!";
+                    Time.timeScale = 0;
+                }
+                else
+                {
+                    playerManager.RespawnAll();
+                    roundOver = false;
+                }
+            }
         }
     }
 
-    public void AddScore(int player, int amount)
+    private bool PlayerWon(out int playerIndex)
     {
-        switch (player)
+        int playerWon = 0;
+        bool gameOver = false;
+
+        if (player0Score >= firstTo)
         {
-            case 0:
-                redScore += amount;
-                break;
-
-            case 1:
-                blueScore += amount;
-                break;
-
-            case 2:
-                yellowScore += amount;
-                break;
-
-            case 3:
-                greenScore += amount;
-                break;
+            gameOver = true;
+            playerWon = 0;
         }
-
-        UpdateScore();
-        CheckWin();
-    }
-
-    void UpdateScore()
-    {
-        redScoreUI.text = redScore + "%";
-        blueScoreUI.text = blueScore + "%";
-        yellowScoreUI.text = yellowScore + "%";
-        greenScoreUI.text = greenScore + "%";
-    }
-
-    void CheckWin()
-    {
-        if (redScore >= maxPoints) {
-            winText.text = "Red has won!";
-            GameEnded();
-        }
-            
-        else if (blueScore >= maxPoints)
+        else if (player0Score >= firstTo)
         {
-            winText.text = "Blue has won!";
-            GameEnded();
+            gameOver = true;
+            playerWon = 0;
         }
-            
-        else if (yellowScore >= maxPoints)
+        else if (player0Score >= firstTo)
         {
-            winText.text = "Yellow has won!";
-            GameEnded();
+            gameOver = true;
+            playerWon = 0;
         }
-            
-        else if (greenScore >= maxPoints)
+        else if (player0Score >= firstTo)
         {
-            winText.text = "Green has won!";
-            GameEnded();
+            gameOver = true;
+            playerWon = 0;
         }
-            
-    }
 
-    void MostPointsCheck()
-    {
-        float highScore = Mathf.Max(redScore, blueScore, yellowScore, greenScore);
-        timer.text = 0 + " : " + 0;
+        playerIndex = playerWon;
 
-        if (highScore == redScore)
-            winText.text = "Red has won!";
-        else if (highScore == blueScore)
-            winText.text = "Blue has won!";
-        else if (highScore == yellowScore)
-            winText.text = "Yellow has won!";
-        else if (highScore == greenScore)
-            winText.text = "Green has won!";
-
-        GameEnded();
-    }
-
-    void GameEnded()
-    {
-        Time.timeScale = 0;
+        return gameOver;
     }
 }
