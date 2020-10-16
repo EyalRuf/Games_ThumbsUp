@@ -61,10 +61,10 @@ public class MultiTargetCamera : MonoBehaviour
         var bounds = new Bounds(targets[0].transform.position, Vector3.zero);
         for (int i = 0; i < targets.Count; i++)
         {
-
-            bounds.Encapsulate(targets[i].transform.position);
-
-
+            if (targets[i] != null)
+            {
+                bounds.Encapsulate(targets[i].transform.position);
+            }
         }
 
         return bounds.size.magnitude / 2;
@@ -80,7 +80,10 @@ public class MultiTargetCamera : MonoBehaviour
         var bounds = new Bounds(targets[0].transform.position, Vector3.zero);
         for (int i = 0; i < targets.Count; i++)
         {
-            bounds.Encapsulate(targets[i].transform.position);
+            if (targets[i] != null)
+            {
+                bounds.Encapsulate(targets[i].transform.position);
+            }
         }
 
         return bounds.center;
