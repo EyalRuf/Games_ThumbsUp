@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public int player1Score;
     public int player2Score;
     public int player3Score;
+    private int round;
 
     [Header("References")]
     public Text winText;
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
     public Text player1ScoreText;
     public Text player2ScoreText;
     public Text player3ScoreText;
+    public Text currentRoundDisplay;
 
     private string[] playerNames = { "Red", "Blue", "Yellow", "Green" };
     private PlayerManager playerManager;
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         playerManager = GetComponent<PlayerManager>();
+        round = 1;
     }
 
     private void Update()
@@ -64,10 +67,10 @@ public class GameManager : MonoBehaviour
                 roundOver = true;
                 roundOverTimer = timeBetweenRounds;
 
-                player0ScoreText.text = player0Score.ToString();
-                player1ScoreText.text = player1Score.ToString();
-                player2ScoreText.text = player2Score.ToString();
-                player3ScoreText.text = player3Score.ToString();
+                player0ScoreText.text = "Red: " + player0Score.ToString();
+                player1ScoreText.text = "Blue: "+player1Score.ToString();
+                player2ScoreText.text = "Yellow: " + player2Score.ToString();
+                player3ScoreText.text = "Green: " +player3Score.ToString();
             }
         }
         else
@@ -84,6 +87,7 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     playerManager.RespawnAll();
+                    UpdateRoundUI();
                     roundOver = false;
                 }
             }
@@ -119,5 +123,11 @@ public class GameManager : MonoBehaviour
         playerIndex = playerWon;
 
         return gameOver;
+    }
+
+    void UpdateRoundUI()
+    {
+        round++;
+        currentRoundDisplay.text = "Round: " + round;
     }
 }
