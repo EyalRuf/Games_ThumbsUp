@@ -7,10 +7,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4411709874753828516, guid: 48d8dc82db0e5974fb67c2b6c2132f95,
+        type: 3}
+      propertyPath: controller.DebugMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4411709874753828516, guid: 48d8dc82db0e5974fb67c2b6c2132f95,
+        type: 3}
+      propertyPath: controller.BDown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4411709874753828516, guid: 48d8dc82db0e5974fb67c2b6c2132f95,
+        type: 3}
+      propertyPath: controller.B
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4411709874753828518, guid: 48d8dc82db0e5974fb67c2b6c2132f95,
         type: 3}
       propertyPath: m_Name
-      value: Player (0)
+      value: Player (0) Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4411709874753828521, guid: 48d8dc82db0e5974fb67c2b6c2132f95,
         type: 3}

@@ -390,6 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f3103bdd3fd71a45bb987aeb2c87fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAnim: {fileID: 0}
   stunned: 0
   dashing: 0
   grounded: 0

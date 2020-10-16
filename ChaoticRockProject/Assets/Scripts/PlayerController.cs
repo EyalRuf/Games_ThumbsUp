@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour
         {
             //Move with the player
             rockBody.MovePosition(Vector3.Lerp(rockBody.position, transform.position + transform.forward * holdingDistance, holdingSpeed * Time.deltaTime));
+            rockBody.rotation = transform.rotation;
             rockBody.useGravity = false;
 
             //Throw the rock
