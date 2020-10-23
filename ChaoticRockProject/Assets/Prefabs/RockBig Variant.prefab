@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RockBig Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1916461774939939912, guid: 975cc741664e6804383a652213f64a5c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1916461774939939917, guid: 975cc741664e6804383a652213f64a5c,
         type: 3}
       propertyPath: m_LocalPosition.x
