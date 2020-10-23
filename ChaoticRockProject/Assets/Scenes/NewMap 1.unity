@@ -861,7 +861,17 @@ PrefabInstance:
     - target: {fileID: 2849981868695565044, guid: b7b6109f9176d9d46b5fd075e2cb8f12,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2849981868695565044, guid: b7b6109f9176d9d46b5fd075e2cb8f12,
+        type: 3}
+      propertyPath: offset.y
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2849981868695565044, guid: b7b6109f9176d9d46b5fd075e2cb8f12,
+        type: 3}
+      propertyPath: offset.z
+      value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 2849981868695565045, guid: b7b6109f9176d9d46b5fd075e2cb8f12,
         type: 3}
