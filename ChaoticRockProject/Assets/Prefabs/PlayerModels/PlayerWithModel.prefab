@@ -428,7 +428,7 @@ MonoBehaviour:
   grounded: 0
   holding: 0
   pickupRange: 4
-  holdingDistance: 5
+  holdingDistance: 4
   holdingHeight: 4
   holdingSpeed: 10
   throwSpeed: 2000
