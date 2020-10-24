@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
                 roundOver = true;
                 roundOverTimer = timeBetweenRounds;
 
-                player0ScoreText.text =  player0Score.ToString();
+                player0ScoreText.text = player0Score.ToString();
                 player1ScoreText.text = player1Score.ToString();
                 player2ScoreText.text = player2Score.ToString();
                 player3ScoreText.text = player3Score.ToString();
