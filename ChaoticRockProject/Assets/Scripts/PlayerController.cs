@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
         stunDecal.SetActive(stunned);
 
         //grounded state
-        Collider[] colliders = Physics.OverlapSphere(jumpCheckPoint.position, 0.01f, floorMask);
+        Collider[] colliders = Physics.OverlapSphere(jumpCheckPoint.position, 0.1f, floorMask);
         grounded = colliders.Length > 0;
 
         //jumping

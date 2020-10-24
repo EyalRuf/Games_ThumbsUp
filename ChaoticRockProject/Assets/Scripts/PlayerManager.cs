@@ -14,10 +14,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject player3Prefab;
 
     [Header("SpawnPoints")]
-    public Transform player0Spawn;
-    public Transform player1Spawn;
-    public Transform player2Spawn;
-    public Transform player3Spawn;
+    public Transform[] playerSpawnPoints;
 
     //player references
     private GameObject player0;
@@ -28,10 +25,34 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         //spawn players on start
-        player0 = Instantiate(player0Prefab, player0Spawn.position, player0Spawn.rotation);
-        player1 = Instantiate(player1Prefab, player1Spawn.position, player1Spawn.rotation);
-        player2 = Instantiate(player2Prefab, player2Spawn.position, player2Spawn.rotation);
-        player3 = Instantiate(player3Prefab, player3Spawn.position, player3Spawn.rotation);
+        SpawnInRandomPositions();
+    }
+
+    void SpawnInRandomPositions ()
+    {
+        int randomSpawnPoint = Random.Range(0, playerSpawnPoints.Length);
+        int p0SpawnPoint = randomSpawnPoint;
+        int p1SpawnPoint = randomSpawnPoint;
+        int p2SpawnPoint = randomSpawnPoint;
+        int p3SpawnPoint = randomSpawnPoint;
+
+        while (p1SpawnPoint == p0SpawnPoint)
+        {
+            p1SpawnPoint = Random.Range(0, playerSpawnPoints.Length);
+        }
+        while (p2SpawnPoint == p0SpawnPoint || p2SpawnPoint == p1SpawnPoint)
+        {
+            p2SpawnPoint = Random.Range(0, playerSpawnPoints.Length);
+        }
+        while (p3SpawnPoint == p0SpawnPoint || p3SpawnPoint == p1SpawnPoint || p3SpawnPoint == p2SpawnPoint)
+        {
+            p3SpawnPoint = Random.Range(0, playerSpawnPoints.Length);
+        }
+
+        player0 = Instantiate(player0Prefab, playerSpawnPoints[p0SpawnPoint].position, playerSpawnPoints[p0SpawnPoint].rotation);
+        player1 = Instantiate(player1Prefab, playerSpawnPoints[p1SpawnPoint].position, playerSpawnPoints[p1SpawnPoint].rotation);
+        player2 = Instantiate(player2Prefab, playerSpawnPoints[p2SpawnPoint].position, playerSpawnPoints[p2SpawnPoint].rotation);
+        player3 = Instantiate(player3Prefab, playerSpawnPoints[p3SpawnPoint].position, playerSpawnPoints[p3SpawnPoint].rotation);
     }
 
     public void RespawnAll()
@@ -54,11 +75,8 @@ public class PlayerManager : MonoBehaviour
             Destroy(player3);
         }
 
-        //respawn all players at start positions
-        player0 = Instantiate(player0Prefab, player0Spawn.position, player0Spawn.rotation);
-        player1 = Instantiate(player1Prefab, player1Spawn.position, player1Spawn.rotation);
-        player2 = Instantiate(player2Prefab, player2Spawn.position, player2Spawn.rotation);
-        player3 = Instantiate(player3Prefab, player3Spawn.position, player3Spawn.rotation);
+        //respawn all players
+        SpawnInRandomPositions();
     }
 
     public bool OnePlayerAlive(out int lastPlayerIndex)

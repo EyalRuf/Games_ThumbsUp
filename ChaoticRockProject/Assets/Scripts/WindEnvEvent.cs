@@ -25,7 +25,7 @@ namespace Assets
         private void OnTriggerStay(Collider other)
         {
             gradualWind = Mathf.Lerp(gradualWind, windStrength, windGradualFactor);
-            other.GetComponent<Rigidbody>().AddForce(windDirection * gradualWind);
+            other.GetComponent<Rigidbody>().AddForce(windDirection * gradualWind, ForceMode.Acceleration);
         }
     }
 }
