@@ -75,8 +75,7 @@ public class PlayerController : MonoBehaviour
         if (grounded && spi.controller.ADown)
         {
             rb.AddForce(Vector3.up * jumpingForce, ForceMode.Acceleration);
-            if (playerAnim != null)
-                playerAnim.TriggerJumpAnimation();
+            playerAnim.TriggerJumpAnimation();
         }
 
         //Dashing
@@ -104,11 +103,7 @@ public class PlayerController : MonoBehaviour
             if (spi.controller.YDown)
             {
                 StartCoroutine(this.ThrowRock());
-                
-                if (playerAnim != null)
-                {
-                    playerAnim.TriggerThrowAnimation();
-                }
+                playerAnim.TriggerThrowAnimation();
             }
         }
 
@@ -138,8 +133,7 @@ public class PlayerController : MonoBehaviour
 
             if (prevHolding != holding)
             {
-                if (playerAnim != null)
-                    playerAnim.ToggleCarryAnimation();
+                playerAnim.ToggleCarryAnimation();
             }
         }
     }
@@ -194,8 +188,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (playerAnim != null)
-            playerAnim.isWalking = isWalking;
+        playerAnim.isWalking = isWalking;
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -350,9 +350,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4411709874753828518}
   serializedVersion: 2
-  m_Mass: 2.5
+  m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0
+  m_AngularDrag: 0.01
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -431,7 +431,7 @@ MonoBehaviour:
   holdingDistance: 4
   holdingHeight: 4
   holdingSpeed: 10
-  throwSpeed: 2000
+  throwSpeed: 5000
   floorMask:
     serializedVersion: 2
     m_Bits: 55
@@ -439,12 +439,13 @@ MonoBehaviour:
   stunDuration: 1.5
   movementSpeed: 20
   rotationSpeed: 10
-  stayUprightSpeed: 5000
-  jumpingForce: 500
+  stayUprightSpeed: 500
+  jumpingForce: 1000
   jumpCheckPoint: {fileID: 1844286817913386660}
+  downForceMaxWhileJumping: 1
   dashingKnockBack: 1000
-  additionalDashSpeed: 18
-  dashDuration: 0.25
+  additionalDashSpeed: 25
+  dashDuration: 0.35
   dashCooldown: 1.5
 --- !u!136 &4411709874753828522
 CapsuleCollider:
