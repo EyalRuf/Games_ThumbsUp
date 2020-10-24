@@ -68,15 +68,14 @@ public class PlayerController : MonoBehaviour
         stunDecal.SetActive(stunned);
 
         //grounded state
-        Collider[] colliders = Physics.OverlapSphere(jumpCheckPoint.position, 0.01f, floorMask);
+        Collider[] colliders = Physics.OverlapSphere(jumpCheckPoint.position, 0.1f, floorMask);
         grounded = colliders.Length > 0;
 
         //jumping
         if (grounded && spi.controller.ADown)
         {
             rb.AddForce(Vector3.up * jumpingForce, ForceMode.Acceleration);
-            if (playerAnim != null)
-                playerAnim.TriggerJumpAnimation();
+            playerAnim.TriggerJumpAnimation();
         }
 
         //Dashing
@@ -104,11 +103,7 @@ public class PlayerController : MonoBehaviour
             if (spi.controller.YDown)
             {
                 StartCoroutine(this.ThrowRock());
-                
-                if (playerAnim != null)
-                {
-                    playerAnim.TriggerThrowAnimation();
-                }
+                playerAnim.TriggerThrowAnimation();
             }
         }
 
@@ -138,8 +133,7 @@ public class PlayerController : MonoBehaviour
 
             if (prevHolding != holding)
             {
-                if (playerAnim != null)
-                    playerAnim.ToggleCarryAnimation();
+                playerAnim.ToggleCarryAnimation();
             }
         }
     }
@@ -194,8 +188,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (playerAnim != null)
-            playerAnim.isWalking = isWalking;
+        playerAnim.isWalking = isWalking;
     }
 
     private void OnCollisionEnter(Collision collision)

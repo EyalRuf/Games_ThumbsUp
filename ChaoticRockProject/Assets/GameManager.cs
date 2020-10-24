@@ -87,8 +87,8 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     playerManager.RespawnAll();
-                    UpdateRoundUI();
                     roundOver = false;
+                    UpdateRoundUI();
                 }
             }
         }
@@ -128,6 +128,6 @@ public class GameManager : MonoBehaviour
     void UpdateRoundUI()
     {
         round++;
-        currentRoundDisplay.text = "Round: " + round;
+        currentRoundDisplay.text = "Round " + round;
     }
 }
