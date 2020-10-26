@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 946729601166404440}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4411709874753828521}
@@ -352,7 +352,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 10
+  m_AngularDrag: 0.01
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -428,22 +428,24 @@ MonoBehaviour:
   grounded: 0
   holding: 0
   pickupRange: 4
-  holdingDistance: 3
+  holdingDistance: 4
+  holdingHeight: 4
   holdingSpeed: 10
-  throwSpeed: 2000
+  throwSpeed: 5000
   floorMask:
     serializedVersion: 2
     m_Bits: 55
   stunDecal: {fileID: 5429441464858858954}
   stunDuration: 1.5
-  movementSpeed: 6
-  rotationSpeed: 5
-  stayUprightSpeed: 5000
-  jumpingForce: 400
+  movementSpeed: 20
+  rotationSpeed: 10
+  stayUprightSpeed: 500
+  jumpingForce: 1000
   jumpCheckPoint: {fileID: 1844286817913386660}
+  downForceMaxWhileJumping: 1
   dashingKnockBack: 1000
-  additionalDashSpeed: 18
-  dashDuration: 0.25
+  additionalDashSpeed: 25
+  dashDuration: 0.35
   dashCooldown: 1.5
 --- !u!136 &4411709874753828522
 CapsuleCollider:

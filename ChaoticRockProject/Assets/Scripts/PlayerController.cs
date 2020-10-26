@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [Header("Picking up and throwing")]
     public float pickupRange;
     public float holdingDistance;
+    public float holdingHeight;
     public float holdingSpeed;
 
     public float throwSpeed;
@@ -67,15 +68,14 @@ public class PlayerController : MonoBehaviour
         stunDecal.SetActive(stunned);
 
         //grounded state
-        Collider[] colliders = Physics.OverlapSphere(jumpCheckPoint.position, 0.01f, floorMask);
+        Collider[] colliders = Physics.OverlapSphere(jumpCheckPoint.position, 0.1f, floorMask);
         grounded = colliders.Length > 0;
 
         //jumping
         if (grounded && spi.controller.ADown)
         {
             rb.AddForce(Vector3.up * jumpingForce, ForceMode.Acceleration);
-            if (playerAnim != null)
-                playerAnim.TriggerJumpAnimation();
+            playerAnim.TriggerJumpAnimation();
         }
 
         //Dashing
@@ -94,27 +94,26 @@ public class PlayerController : MonoBehaviour
         if (holding && rockBody != null)
         {
             //Move with the player
-            rockBody.MovePosition(Vector3.Lerp(rockBody.position, transform.position + transform.forward * holdingDistance, holdingSpeed * Time.deltaTime));
+            rockBody.MovePosition(transform.position + transform.forward * holdingDistance + Vector3.up * holdingHeight);
             rockBody.rotation = transform.rotation;
+            rockBody.GetComponent<Collider>().enabled = false;
             rockBody.useGravity = false;
 
             //Throw the rock
             if (spi.controller.YDown)
             {
                 StartCoroutine(this.ThrowRock());
-                if (playerAnim != null)
-                {
-                    playerAnim.TriggerThrowAnimation();
-                }
+                playerAnim.TriggerThrowAnimation();
             }
         }
 
-        if (spi.controller.BDown)
+        if (spi.controller.BDown) // Pick up / put down
         {
             bool prevHolding = holding;
             if (holding && rockBody != null)
             {
                 //drop the rock
+                rockBody.GetComponent<Collider>().enabled = true;
                 rockBody.useGravity = true;
                 holding = false;
             }
@@ -134,8 +133,7 @@ public class PlayerController : MonoBehaviour
 
             if (prevHolding != holding)
             {
-                if (playerAnim != null)
-                    playerAnim.ToggleCarryAnimation();
+                playerAnim.ToggleCarryAnimation();
             }
         }
     }
@@ -146,6 +144,10 @@ public class PlayerController : MonoBehaviour
         holding = false;
         rockBody.useGravity = true;
         rockBody.AddForce(transform.forward* throwSpeed, ForceMode.Acceleration); //changed to acceleration to add force independent of mass
+
+        //Enable collider again
+        yield return new WaitForSeconds(.1f);
+        rockBody.GetComponent<Collider>().enabled = true;
     }
 
     private void FixedUpdate()
@@ -186,8 +188,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (playerAnim != null)
-            playerAnim.isWalking = isWalking;
+        playerAnim.isWalking = isWalking;
     }
 
     private void OnCollisionEnter(Collision collision)
