@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (spi.controller.BDown)
+        if (spi.controller.BDown) // Pick up / put down
         {
             bool prevHolding = holding;
             if (holding && rockBody != null)

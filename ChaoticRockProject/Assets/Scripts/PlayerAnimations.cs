@@ -16,7 +16,6 @@ public class PlayerAnimations : MonoBehaviour
         isWalking = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isWalking != animator.GetBool(ANIM_PARAM_NAME_WALK))
