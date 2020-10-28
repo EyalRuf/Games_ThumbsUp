@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     public float throwSpeed;
     private Rigidbody rockBody;
-    private float rockThrowDelay = 0.5f;
+    private float rockThrowDelay = 0.35f;
 
     [Header("Stunning")]
     public LayerMask floorMask;
@@ -38,6 +38,9 @@ public class PlayerController : MonoBehaviour
     [Header("Jumping")]
     public float jumpingForce;
     public Transform jumpCheckPoint;
+    public float gravityWhenNotGrounded;
+    public float gravityApplicationFactor;
+    private float graduallyAplliedGravity = 0;
 
     [Header("Dashing")]
     public float dashingKnockBack;
@@ -159,7 +162,7 @@ public class PlayerController : MonoBehaviour
         {
             //keep player upright
             Quaternion rot = Quaternion.FromToRotation(transform.up, Vector3.up);
-            rb.AddTorque(new Vector3(rot.x, rot.y, rot.z) * stayUprightSpeed * Time.fixedDeltaTime);
+            rb.AddTorque(new Vector3(rot.x, rot.y, rot.z) * stayUprightSpeed * Time.fixedDeltaTime, ForceMode.Acceleration);
 
             //physics based movement and dashing
             direction = new Vector3(spi.controller.Joystick_Left.x, 0, spi.controller.Joystick_Left.y);
@@ -186,9 +189,21 @@ public class PlayerController : MonoBehaviour
 
                 rb.MoveRotation(smoothedRotation);
             }
+
+            if (grounded)
+            {
+                graduallyAplliedGravity = 0;
+            }
+            else
+            {
+                graduallyAplliedGravity = Mathf.Lerp(graduallyAplliedGravity, gravityWhenNotGrounded, gravityApplicationFactor);
+                rb.AddForce(Vector3.down * graduallyAplliedGravity, ForceMode.Acceleration);
+            }
         }
 
         playerAnim.isWalking = isWalking;
+
+        
     }
 
     private void OnCollisionEnter(Collision collision)
