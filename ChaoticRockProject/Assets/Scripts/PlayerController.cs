@@ -13,6 +13,14 @@ public class PlayerController : MonoBehaviour
     public bool dashing;
     public bool grounded;
     public bool holding;
+    public bool walking;
+    public bool blocking;
+
+    [Header("Blocking")]
+    public float blockingTime;
+    public GameObject smokePoofPrefab;
+    public GameObject blockingModel;
+    public GameObject playerModel;
 
     [Header("Picking up and throwing")]
     public float pickupRange;
@@ -22,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
     public float throwSpeed;
     private Rigidbody rockBody;
-    private float rockThrowDelay = 0.5f;
+    private float rockThrowDelay = 0.35f;
 
     [Header("Stunning")]
     public LayerMask floorMask;
@@ -38,6 +46,9 @@ public class PlayerController : MonoBehaviour
     [Header("Jumping")]
     public float jumpingForce;
     public Transform jumpCheckPoint;
+    public float gravityWhenNotGrounded;
+    public float gravityApplicationFactor;
+    private float graduallyAplliedGravity = 0;
 
     [Header("Dashing")]
     public float dashingKnockBack;
@@ -66,6 +77,19 @@ public class PlayerController : MonoBehaviour
         stunned = stunCounter > 0;
 
         stunDecal.SetActive(stunned);
+
+        if (blocking)
+        {
+            return;
+        }
+        if (!stunned)
+        {
+            if (spi.controller.XDown)
+            {
+                Block();
+                Invoke("UnBlock", blockingTime);
+            }
+        }
 
         //grounded state
         Collider[] colliders = Physics.OverlapSphere(jumpCheckPoint.position, 0.1f, floorMask);
@@ -152,14 +176,12 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        bool isWalking = false;
-
         //if not stunned
-        if (!stunned)
+        if (!stunned && !blocking)
         {
             //keep player upright
             Quaternion rot = Quaternion.FromToRotation(transform.up, Vector3.up);
-            rb.AddTorque(new Vector3(rot.x, rot.y, rot.z) * stayUprightSpeed * Time.fixedDeltaTime);
+            rb.AddTorque(new Vector3(rot.x, rot.y, rot.z) * stayUprightSpeed * Time.fixedDeltaTime, ForceMode.Acceleration);
 
             //physics based movement and dashing
             direction = new Vector3(spi.controller.Joystick_Left.x, 0, spi.controller.Joystick_Left.y);
@@ -169,8 +191,8 @@ public class PlayerController : MonoBehaviour
 
             rb.MovePosition(rb.position + movementVector);
 
-            // Setting player walk animation according to weather we're moving
-            isWalking = movementVector != Vector3.zero;
+            // Setting player walk animation according to wether we're moving
+            walking = movementVector != Vector3.zero;
 
             //physics based rotation
             Vector3 newRotationDirection = new Vector3(spi.controller.JoystickRaw_Left.x, 0, spi.controller.JoystickRaw_Left.y);
@@ -186,9 +208,19 @@ public class PlayerController : MonoBehaviour
 
                 rb.MoveRotation(smoothedRotation);
             }
+
+            if (grounded)
+            {
+                graduallyAplliedGravity = 0;
+            }
+            else
+            {
+                graduallyAplliedGravity = Mathf.Lerp(graduallyAplliedGravity, gravityWhenNotGrounded, gravityApplicationFactor);
+                rb.AddForce(Vector3.down * graduallyAplliedGravity, ForceMode.Acceleration);
+            }
         }
 
-        playerAnim.isWalking = isWalking;
+        playerAnim.isWalking = walking;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -222,16 +254,41 @@ public class PlayerController : MonoBehaviour
 
     public void Stun(Vector3 knockbackDirection)
     {
-        //if holding rock drop it
-        if(rockBody != null)
+        if (!blocking)
         {
-            rockBody.useGravity = true;
-            holding = false;
+            //if holding rock drop it
+            if (rockBody != null)
+            {
+                rockBody.useGravity = true;
+                holding = false;
+            }
+
+            stunCounter = stunDuration;
+            stunned = true;
+
+            rb.AddForce(knockbackDirection * dashingKnockBack, ForceMode.Acceleration);
         }
+    }
 
-        stunCounter = stunDuration;
-        stunned = true;
+    public void Block()
+    {
+        blocking = true;
 
-        rb.AddForce(knockbackDirection * dashingKnockBack, ForceMode.Acceleration);
+        Instantiate(smokePoofPrefab, transform.position + Vector3.up, Quaternion.identity);
+
+        playerModel.SetActive(false);
+        blockingModel.SetActive(true);
+        rb.isKinematic = true;
+    }
+
+    public void UnBlock()
+    {
+        blocking = false;
+
+        Instantiate(smokePoofPrefab, transform.position + Vector3.up, Quaternion.identity);
+
+        playerModel.SetActive(true);
+        blockingModel.SetActive(false);
+        rb.isKinematic = false;
     }
 }
