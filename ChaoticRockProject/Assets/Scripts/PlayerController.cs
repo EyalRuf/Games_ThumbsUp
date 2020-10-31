@@ -15,12 +15,16 @@ public class PlayerController : MonoBehaviour
     public bool holding;
     public bool walking;
     public bool blocking;
+    public bool beingHeld;
 
     [Header("Blocking")]
     public float blockingTime;
     public GameObject smokePoofPrefab;
     public GameObject blockingModel;
     public GameObject playerModel;
+
+    [Header("Being held")]
+    public PlayerController beingHeldBy;
 
     [Header("Picking up and throwing")]
     public float pickupRange;
@@ -151,6 +155,19 @@ public class PlayerController : MonoBehaviour
                     {
                         rockBody = nearbyObjects[i].GetComponent<Rigidbody>();
                         holding = true;
+                        break;
+                    }
+                    else if (nearbyObjects[i].tag == "Player" && nearbyObjects[i].GetComponent<PlayerController>().blocking && nearbyObjects[i].gameObject != gameObject)
+                    {
+                        PlayerController otherPlayer = nearbyObjects[i].GetComponent<PlayerController>();
+
+                        otherPlayer.rb.constraints = RigidbodyConstraints.None;
+                        otherPlayer.beingHeldBy = this;
+                        otherPlayer.beingHeld = true;
+
+                        rockBody = nearbyObjects[i].GetComponent<Rigidbody>();
+                        holding = true;
+                        break;
                     }
                 }
             }
@@ -208,7 +225,10 @@ public class PlayerController : MonoBehaviour
 
                 rb.MoveRotation(smoothedRotation);
             }
+        }
 
+        if (!stunned)
+        {
             if (grounded)
             {
                 graduallyAplliedGravity = 0;
@@ -278,7 +298,7 @@ public class PlayerController : MonoBehaviour
 
         playerModel.SetActive(false);
         blockingModel.SetActive(true);
-        rb.isKinematic = true;
+        rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
     }
 
     public void UnBlock()
@@ -289,6 +309,19 @@ public class PlayerController : MonoBehaviour
 
         playerModel.SetActive(true);
         blockingModel.SetActive(false);
-        rb.isKinematic = false;
+        rb.constraints = RigidbodyConstraints.None;
+
+        if(beingHeldBy != null)
+        {
+            if (beingHeldBy.holding && beingHeldBy.rockBody != null)
+            {
+                //drop the rock
+                beingHeldBy.rockBody.GetComponent<Collider>().enabled = true;
+                beingHeldBy.rockBody.useGravity = true;
+                beingHeldBy.holding = false;
+            }
+        }
+
+        beingHeld = false;
     }
 }
