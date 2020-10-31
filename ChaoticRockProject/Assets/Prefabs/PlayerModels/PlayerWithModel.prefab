@@ -1444,11 +1444,13 @@ MonoBehaviour:
   holding: 0
   walking: 0
   blocking: 0
-  blockingTime: 2
+  beingHeld: 0
+  blockingTime: 3
   smokePoofPrefab: {fileID: 5313522803322136213, guid: 8e937468b73a29843a9d414d2850c6c4,
     type: 3}
   blockingModel: {fileID: 8251957816325676191}
   playerModel: {fileID: 2203758186752307151}
+  beingHeldBy: {fileID: 0}
   pickupRange: 4
   holdingDistance: 4
   holdingHeight: 4
