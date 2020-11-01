@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public float timeBetweenRounds = 2;
     private bool roundOver = false;
     private float roundOverTimer = 0;
+    private bool gameOver = false;
 
     [Header("Scores")]
     public int player0Score;
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
     public Text player2ScoreText;
     public Text player3ScoreText;
     public Text currentRoundDisplay;
+    public AudioSource roundOverAuSource;
 
     private string[] playerNames = { "Red", "Blue", "Yellow", "Green" };
     private PlayerManager playerManager;
@@ -34,61 +36,71 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         playerManager = GetComponent<PlayerManager>();
+        roundOverAuSource = GetComponent<AudioSource>();
         round = 1;
     }
 
     private void Update()
     {
-        if (!roundOver)
+        if (!gameOver)
         {
-            int survivingPlayerIndex;
-            if (playerManager.OnePlayerAlive(out survivingPlayerIndex))
+            if (!roundOver)
             {
-                //add score
-                switch (survivingPlayerIndex)
+                int survivingPlayerIndex;
+                if (playerManager.OnePlayerAlive(out survivingPlayerIndex))
                 {
-                    case 0:
-                        player0Score++;
-                        break;
+                    //add score
+                    switch (survivingPlayerIndex)
+                    {
+                        case 0:
+                            player0Score++;
+                            break;
 
-                    case 1:
-                        player1Score++;
-                        break;
+                        case 1:
+                            player1Score++;
+                            break;
 
-                    case 2:
-                        player2Score++;
-                        break;
+                        case 2:
+                            player2Score++;
+                            break;
 
-                    case 3:
-                        player3Score++;
-                        break;
+                        case 3:
+                            player3Score++;
+                            break;
+                    }
+
+                    roundOver = true;
+                    roundOverTimer = timeBetweenRounds;
+
+                    player0ScoreText.text = player0Score.ToString();
+                    player1ScoreText.text = player1Score.ToString();
+                    player2ScoreText.text = player2Score.ToString();
+                    player3ScoreText.text = player3Score.ToString();
                 }
-
-                roundOver = true;
-                roundOverTimer = timeBetweenRounds;
-
-                player0ScoreText.text = player0Score.ToString();
-                player1ScoreText.text = player1Score.ToString();
-                player2ScoreText.text = player2Score.ToString();
-                player3ScoreText.text = player3Score.ToString();
             }
-        }
-        else
-        {
-            roundOverTimer -= Time.deltaTime;
-            if(roundOverTimer < 0)
+            else
             {
-                int playerWon;
-                if (PlayerWon(out playerWon))
+                roundOverTimer -= Time.deltaTime;
+                if(roundOverTimer < 0)
                 {
-                    winText.text = playerNames[playerWon] + " has won!";
-                    Time.timeScale = 0;
-                }
-                else
-                {
-                    playerManager.RespawnAll();
-                    roundOver = false;
-                    UpdateRoundUI();
+                    if (!roundOverAuSource.isPlaying)
+                    {
+                        roundOverAuSource.Play();
+                    }
+
+                    int playerWon;
+                    if (PlayerWon(out playerWon))
+                    {
+                        winText.text = playerNames[playerWon] + " has won!";
+                        Time.timeScale = 0;
+                        gameOver = true;
+                    }
+                    else
+                    {
+                        playerManager.RespawnAll();
+                        roundOver = false;
+                        UpdateRoundUI();
+                    }
                 }
             }
         }

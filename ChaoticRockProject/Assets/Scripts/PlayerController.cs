@@ -6,7 +6,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Other player scripts")]
-    [SerializeField] private PlayerAnimations playerAnim;
+    [SerializeField] private PlayerAnimations pAnim;
+    [SerializeField] private PlayerAudioManager pAudioManager;
 
     [Header("State")]
     public bool stunned;
@@ -103,7 +104,8 @@ public class PlayerController : MonoBehaviour
         if (grounded && spi.controller.ADown)
         {
             rb.AddForce(Vector3.up * jumpingForce, ForceMode.Acceleration);
-            playerAnim.TriggerJumpAnimation();
+            pAnim.TriggerJumpAnimation();
+            pAudioManager.PlayJumpSound();
         }
 
         //Dashing
@@ -116,6 +118,7 @@ public class PlayerController : MonoBehaviour
         {
             dashCooldownCounter = dashCooldown;
             dashCounter = dashDuration;
+            pAudioManager.PlayDashSound();
         }
 
         //Rock pickup
@@ -131,7 +134,7 @@ public class PlayerController : MonoBehaviour
             if (spi.controller.YDown)
             {
                 StartCoroutine(this.ThrowRock());
-                playerAnim.TriggerThrowAnimation();
+                pAnim.TriggerThrowAnimation();
             }
         }
 
@@ -174,7 +177,7 @@ public class PlayerController : MonoBehaviour
 
             if (prevHolding != holding)
             {
-                playerAnim.ToggleCarryAnimation();
+                pAnim.ToggleCarryAnimation();
             }
         }
     }
@@ -185,6 +188,7 @@ public class PlayerController : MonoBehaviour
         holding = false;
         rockBody.useGravity = true;
         rockBody.AddForce(transform.forward* throwSpeed, ForceMode.Acceleration); //changed to acceleration to add force independent of mass
+        pAudioManager.PlayThrowSound();
 
         //Enable collider again
         yield return new WaitForSeconds(.1f);
@@ -240,7 +244,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        playerAnim.isWalking = walking;
+        pAnim.isWalking = walking;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -287,6 +291,7 @@ public class PlayerController : MonoBehaviour
             stunned = true;
 
             rb.AddForce(knockbackDirection * dashingKnockBack, ForceMode.Acceleration);
+            pAudioManager.PlayHitSound();
         }
     }
 
@@ -296,6 +301,7 @@ public class PlayerController : MonoBehaviour
 
         Instantiate(smokePoofPrefab, transform.position + Vector3.up, Quaternion.identity);
 
+        pAudioManager.PlayBlockSound();
         playerModel.SetActive(false);
         blockingModel.SetActive(true);
         rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
@@ -310,6 +316,7 @@ public class PlayerController : MonoBehaviour
         playerModel.SetActive(true);
         blockingModel.SetActive(false);
         rb.constraints = RigidbodyConstraints.None;
+        pAudioManager.PlayBlockSound(); // Sounds right even though it's the same as blocking
 
         if(beingHeldBy != null)
         {
