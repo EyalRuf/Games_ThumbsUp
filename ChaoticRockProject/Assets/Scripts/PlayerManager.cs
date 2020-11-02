@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject player3Prefab;
 
     [Header("SpawnPoints")]
-    public Transform[] playerSpawnPoints;
+    public List<Transform> playerSpawnPoints;
 
     //player references
     private GameObject player0;
@@ -30,29 +30,29 @@ public class PlayerManager : MonoBehaviour
 
     void SpawnInRandomPositions ()
     {
-        int randomSpawnPoint = Random.Range(0, playerSpawnPoints.Length);
-        int p0SpawnPoint = randomSpawnPoint;
-        int p1SpawnPoint = randomSpawnPoint;
-        int p2SpawnPoint = randomSpawnPoint;
-        int p3SpawnPoint = randomSpawnPoint;
+        List<Transform> spawnPoints = new List<Transform>(playerSpawnPoints);
 
-        while (p1SpawnPoint == p0SpawnPoint)
-        {
-            p1SpawnPoint = Random.Range(0, playerSpawnPoints.Length);
-        }
-        while (p2SpawnPoint == p0SpawnPoint || p2SpawnPoint == p1SpawnPoint)
-        {
-            p2SpawnPoint = Random.Range(0, playerSpawnPoints.Length);
-        }
-        while (p3SpawnPoint == p0SpawnPoint || p3SpawnPoint == p1SpawnPoint || p3SpawnPoint == p2SpawnPoint)
-        {
-            p3SpawnPoint = Random.Range(0, playerSpawnPoints.Length);
-        }
+        // Finding random spawn point then removing it from the list and doing the same for next players
+        // Will throw Errors if the there aren't 4+ spawn points attached to the object in the inspector
+        int randomSpawnPoint = Random.Range(0, spawnPoints.Count);
+        Transform p0SpawnPoint = spawnPoints[randomSpawnPoint];
+        spawnPoints.RemoveAt(randomSpawnPoint);
 
-        player0 = Instantiate(player0Prefab, playerSpawnPoints[p0SpawnPoint].position, playerSpawnPoints[p0SpawnPoint].rotation);
-        player1 = Instantiate(player1Prefab, playerSpawnPoints[p1SpawnPoint].position, playerSpawnPoints[p1SpawnPoint].rotation);
-        player2 = Instantiate(player2Prefab, playerSpawnPoints[p2SpawnPoint].position, playerSpawnPoints[p2SpawnPoint].rotation);
-        player3 = Instantiate(player3Prefab, playerSpawnPoints[p3SpawnPoint].position, playerSpawnPoints[p3SpawnPoint].rotation);
+        randomSpawnPoint = Random.Range(0, spawnPoints.Count);
+        Transform p1SpawnPoint = spawnPoints[randomSpawnPoint];
+        spawnPoints.RemoveAt(randomSpawnPoint);
+
+        randomSpawnPoint = Random.Range(0, spawnPoints.Count);
+        Transform p2SpawnPoint = spawnPoints[randomSpawnPoint];
+        spawnPoints.RemoveAt(randomSpawnPoint);
+
+        randomSpawnPoint = Random.Range(0, spawnPoints.Count);
+        Transform p3SpawnPoint = spawnPoints[randomSpawnPoint];
+
+        player0 = Instantiate(player0Prefab, p0SpawnPoint.position, p0SpawnPoint.rotation);
+        player1 = Instantiate(player1Prefab, p1SpawnPoint.position, p1SpawnPoint.rotation);
+        player2 = Instantiate(player2Prefab, p2SpawnPoint.position, p2SpawnPoint.rotation);
+        player3 = Instantiate(player3Prefab, p3SpawnPoint.position, p3SpawnPoint.rotation);
     }
 
     public void RespawnAll()

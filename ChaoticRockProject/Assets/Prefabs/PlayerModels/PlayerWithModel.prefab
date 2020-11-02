@@ -1332,8 +1332,8 @@ GameObject:
   - component: {fileID: 4411709874753828516}
   - component: {fileID: 4411709874753828519}
   - component: {fileID: 4411709874753828522}
-  - component: {fileID: 3685803927042546972}
   - component: {fileID: 6266943747656353749}
+  - component: {fileID: 3685803927042546972}
   m_Layer: 8
   m_Name: PlayerWithModel
   m_TagString: Player
@@ -1489,6 +1489,23 @@ CapsuleCollider:
   m_Height: 1.55
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &6266943747656353749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4411709874753828518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8448d6c1edc73b04d8e20dea950c518a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashSound: {fileID: 8300000, guid: 5f1e1f25b2e54864788a0093ca0cf83b, type: 3}
+  jumpSound: {fileID: 8300000, guid: 1fe4821cb0d2af44ebbe38562b60f839, type: 3}
+  hitSound: {fileID: 8300000, guid: 64563357054fa1f4994132e9b9a760e7, type: 3}
+  throwSound: {fileID: 8300000, guid: 8846f8881ea893f4d8ab01deb5b418b7, type: 3}
+  blockSound: {fileID: 8300000, guid: e2dbd893e09d8ac4cb9d4a542d277cf3, type: 3}
 --- !u!82 &3685803927042546972
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1585,23 +1602,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6266943747656353749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4411709874753828518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8448d6c1edc73b04d8e20dea950c518a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dashSound: {fileID: 8300000, guid: 5f1e1f25b2e54864788a0093ca0cf83b, type: 3}
-  jumpSound: {fileID: 8300000, guid: 1fe4821cb0d2af44ebbe38562b60f839, type: 3}
-  hitSound: {fileID: 8300000, guid: 64563357054fa1f4994132e9b9a760e7, type: 3}
-  throwSound: {fileID: 8300000, guid: 8846f8881ea893f4d8ab01deb5b418b7, type: 3}
-  blockSound: {fileID: 8300000, guid: e2dbd893e09d8ac4cb9d4a542d277cf3, type: 3}
 --- !u!1 &4444450248597816081
 GameObject:
   m_ObjectHideFlags: 0

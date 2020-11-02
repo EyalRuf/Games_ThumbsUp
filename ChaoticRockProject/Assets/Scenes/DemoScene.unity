@@ -2238,7 +2238,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.8301887, g: 0.76189774, b: 0.57564974, a: 1}
+  m_Color: {r: 0.7967483, g: 0.8018868, b: 0.66193485, a: 1}
   m_Intensity: 1.25
   m_Range: 10
   m_SpotAngle: 30
@@ -2550,6 +2550,11 @@ PrefabInstance:
       propertyPath: currentRoundDisplay
       value: 
       objectReference: {fileID: 1731640229611461258}
+    - target: {fileID: 411095950957322583, guid: 4a7e005b03908b9408c296dac5592f38,
+        type: 3}
+      propertyPath: roundOverAuSource
+      value: 
+      objectReference: {fileID: 1125887126}
     - target: {fileID: 411095950957322585, guid: 4a7e005b03908b9408c296dac5592f38,
         type: 3}
       propertyPath: playerSpawnPoints.Array.size
