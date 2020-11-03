@@ -2555,6 +2555,11 @@ PrefabInstance:
       propertyPath: roundOverAuSource
       value: 
       objectReference: {fileID: 1125887126}
+    - target: {fileID: 411095950957322583, guid: 4a7e005b03908b9408c296dac5592f38,
+        type: 3}
+      propertyPath: timeBetweenRounds
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 411095950957322585, guid: 4a7e005b03908b9408c296dac5592f38,
         type: 3}
       propertyPath: playerSpawnPoints.Array.size
@@ -3565,6 +3570,7 @@ GameObject:
   m_Component:
   - component: {fileID: 802166162}
   - component: {fileID: 802166161}
+  - component: {fileID: 802166163}
   m_Layer: 0
   m_Name: BackgroundMusic
   m_TagString: Untagged
@@ -3583,7 +3589,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e9e330781dbcbab4c94b9353a3f67d80, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
@@ -3682,6 +3688,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &802166163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802166160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94060db7de102e84cabdd9fd158b222a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClips:
+  - {fileID: 8300000, guid: 9f707b9e3d4f4cc48ad15437fb5fe58f, type: 3}
+  - {fileID: 8300000, guid: e9e330781dbcbab4c94b9353a3f67d80, type: 3}
 --- !u!4 &804986656 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: bcd65237e57a75348badd8c90f53bcd0,

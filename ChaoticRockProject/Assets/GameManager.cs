@@ -116,20 +116,20 @@ public class GameManager : MonoBehaviour
             gameOver = true;
             playerWon = 0;
         }
-        else if (player0Score >= firstTo)
+        else if (player1Score >= firstTo)
         {
             gameOver = true;
-            playerWon = 0;
+            playerWon = 1;
         }
-        else if (player0Score >= firstTo)
+        else if (player2Score >= firstTo)
         {
             gameOver = true;
-            playerWon = 0;
+            playerWon = 2;
         }
-        else if (player0Score >= firstTo)
+        else if (player3Score >= firstTo)
         {
             gameOver = true;
-            playerWon = 0;
+            playerWon = 3;
         }
 
         playerIndex = playerWon;
